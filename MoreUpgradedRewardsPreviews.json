@@ -1,8 +1,14 @@
 {
+  "id": "MoreUpgradedRewardsPreviews",
   "name": "More Upgraded Rewards Previews",
-  "description": "Adds 'Show Upgrades' toggle to all card selection screens",
-  "version": "0.0.1",
   "author": "3m-code",
-  "entrypoint": "MoreUpgradedRewardsPreviews.Main",
-  "dependencies": []
+  "description": "Adds 'Show Upgrades' toggle to all card selection screens",
+  "version": "v0.0.1",
+  "min_game_version": "0.107.0",
+  "has_pck": false,
+  "has_dll": true,
+  "affects_gameplay": false,
+  "dependencies": [
+    
+  ]
 }
