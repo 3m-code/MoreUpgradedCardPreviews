@@ -1,14 +1,11 @@
 <Project>
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>MoreUpgradedRewardsPreviews</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="0Harmony" Version="2.0.4" />
-  </ItemGroup>
 </Project>
