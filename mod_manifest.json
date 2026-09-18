@@ -9,6 +9,7 @@
   "has_dll": true,
   "affects_gameplay": false,
   "dependencies": [
-    
-  ]
+    { "id": "STS2-RitsuLib" }
+  ],
+  "entrypoint": "MoreUpgradedRewardsPreviews.Main"
 }
