@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>MoreUpgradedRewardsPreviews</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="sts2">
+      <HintPath>lib\sts2.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <PackageReference Include="STS2.RitsuLib" Version="0.6.2" />
+  </ItemGroup>
+
+</Project>
