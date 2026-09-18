@@ -1,5 +1,9 @@
-/.old/
-/.exported/
+.old/
+.exported/
 
-/.idea/
-/obj/
+.idea/
+obj/
+bin/ 
+
+lib/sts2.dll
+
