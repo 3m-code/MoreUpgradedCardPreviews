@@ -27,6 +27,8 @@ public static class Main
 
         var patcher = RitsuLibFramework.CreatePatcher(ModId, "main");
         CardRewardSelectionScreenPatch.AddTo(patcher);
+        CardRemovalSelectionScreenPatch.AddTo(patcher);
+        
         RitsuLibFramework.ApplyRequiredPatcher(patcher, DisableMod);
     }
 
