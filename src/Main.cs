@@ -1,8 +1,12 @@
 using System.Reflection;
+
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
+
 using STS2RitsuLib;
 using STS2RitsuLib.Interop;
+
+//using MoreUpgradedRewardsPreviews.Patches;
 
 namespace MoreUpgradedRewardsPreviews;
 
@@ -19,8 +23,15 @@ public static class Main
 
         Logger = RitsuLibFramework.CreateLogger(ModId);
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
+        RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
 
-        //RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
-        Logger.Info($"{ModId} version {assembly.GetName().Version} initialized.");
+        var patcher = RitsuLibFramework.CreatePatcher(ModId, "main");
+        //CardRewardSelectionScreenPatch.AddTo(patcher);
+        RitsuLibFramework.ApplyRequiredPatcher(patcher, DisableMod);
+    }
+
+    private static void DisableMod()
+    {
+        Logger.Error("Failed to apply required patches. Disabling mod.");
     }
 }

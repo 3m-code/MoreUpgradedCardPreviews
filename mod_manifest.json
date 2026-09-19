@@ -5,11 +5,12 @@
   "description": "Adds 'Show Upgrades' toggle to all card selection screens",
   "version": "v0.0.1",
   "min_game_version": "0.107.0",
-  "has_pck": false,
+  "has_pck": true,
   "has_dll": true,
   "affects_gameplay": false,
   "dependencies": [
     { "id": "STS2-RitsuLib" }
   ],
-  "entrypoint": "MoreUpgradedRewardsPreviews.Main"
+  "entrypoint": "MoreUpgradedRewardsPreviews.Main",
+  "pck_name": "MoreUpgradedRewardsPreviews"
 }

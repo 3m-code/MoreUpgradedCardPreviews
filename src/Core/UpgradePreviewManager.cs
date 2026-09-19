@@ -3,7 +3,7 @@ using System;
 namespace MoreUpgradedRewardsPreviews.Core;
 
 /// <summary>
-/// Singleton manager for tracking and coordinating upgrade preview state across all screens.
+/// Global state for the upgrade preview toggle.
 /// </summary>
 public class UpgradePreviewManager
 {
@@ -21,24 +21,21 @@ public class UpgradePreviewManager
     public static UpgradePreviewManager Instance => _instance;
 
     /// <summary>
-    /// Gets the current upgrade preview state.
+    /// Gets whether upgrade previews are currently enabled.
     /// </summary>
     public bool IsShowingUpgrades => _isShowingUpgrades;
 
     /// <summary>
-    /// Sets the upgrade preview state and notifies listeners.
+    /// Sets the upgrade preview state.
     /// </summary>
-    /// <param name="show">Whether to show upgrade previews.</param>
-    private void SetShowingUpgrades(bool show)
+    public void SetShowingUpgrades(bool show)
     {
-        if (_isShowingUpgrades != show)
-        {
-            _isShowingUpgrades = show;
+        if (_isShowingUpgrades == show) return;
+        _isShowingUpgrades = show;
+        
+        Main.Logger.Info($"Upgrade preview state changed to: {show}");
 
-            Main.Logger.Info($"Upgrade preview state changed to: {show}");
-
-            OnToggleStateChanged?.Invoke(show);
-        }
+        OnToggleStateChanged?.Invoke(show);
     }
 
     /// <summary>
@@ -48,5 +45,4 @@ public class UpgradePreviewManager
     {
         SetShowingUpgrades(!_isShowingUpgrades);
     }
-
 }
