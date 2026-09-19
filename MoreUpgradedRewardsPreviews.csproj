@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Godot.NET.Sdk/4.5.1">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -15,8 +15,12 @@
       <HintPath>lib\sts2.dll</HintPath>
       <Private>false</Private>
     </Reference>
-
+    
+    <PackageReference Include="lamali.StS2.RefLib" Version="0.111.0-beta" />
     <PackageReference Include="STS2.RitsuLib" Version="0.6.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="MoreUpgradedRewardsPreviews.pck" />
   </ItemGroup>
 
 </Project>

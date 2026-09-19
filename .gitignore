@@ -1,9 +1,20 @@
+# Old / generated project data
 .old/
 .exported/
 
+# Godot
+.godot/
+
+# IDE
 .idea/
+*.DotSettings.user
+
+# .NET build output
 obj/
-bin/ 
+bin/
 
+# Godot export artifacts
+*.pck
+
+# Game reference DLL
 lib/sts2.dll
-
