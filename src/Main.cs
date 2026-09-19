@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Modding;
 using STS2RitsuLib;
 using STS2RitsuLib.Interop;
 
-//using MoreUpgradedRewardsPreviews.Patches;
+using MoreUpgradedRewardsPreviews.Patches;
 
 namespace MoreUpgradedRewardsPreviews;
 
@@ -26,7 +26,7 @@ public static class Main
         RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
 
         var patcher = RitsuLibFramework.CreatePatcher(ModId, "main");
-        //CardRewardSelectionScreenPatch.AddTo(patcher);
+        CardRewardSelectionScreenPatch.AddTo(patcher);
         RitsuLibFramework.ApplyRequiredPatcher(patcher, DisableMod);
     }
 
