@@ -18,19 +18,22 @@ public sealed class UpgradePreviewToggle
     private const string GameTickboxScenePath = "res://scenes/ui/tickbox.tscn";
     private const string MegaLabelScriptPath = "res://addons/mega_text/MegaLabel.cs";
     private const string FontPath = "res://themes/kreon_bold_glyph_space_one.tres";
-
+    
+    private readonly Control _container;
     private readonly UpgradePreviewTickbox _tickbox;
     private readonly Action<bool> _applyState;
-
+    
     private bool _isSyncing;
     private bool _disposed;
 
-    private UpgradePreviewToggle(UpgradePreviewTickbox tickbox, Action<bool> applyState)
+    private UpgradePreviewToggle(Control container, UpgradePreviewTickbox tickbox, Action<bool> applyState)
     {
+        _container = container;
         _tickbox = tickbox;
         _applyState = applyState;
     }
-
+    
+    public Control Container => _container;
     public UpgradePreviewTickbox Tickbox => _tickbox;
 
     public static UpgradePreviewToggle? TryCreate(Node parent, Action<bool> applyState)
@@ -67,7 +70,7 @@ public sealed class UpgradePreviewToggle
 
             parent.AddChild(container);
 
-            var toggle = new UpgradePreviewToggle(tickbox, applyState);
+            var toggle = new UpgradePreviewToggle(container, tickbox, applyState);
             parent.TreeExiting += toggle.Dispose;
             toggle.Initialize();
             return toggle;
@@ -249,7 +252,7 @@ public sealed class UpgradePreviewToggle
         }
     }
 
-    public void Dispose()
+    private void Dispose()
     {
         if (_disposed) return;
         _disposed = true;
