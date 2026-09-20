@@ -73,16 +73,17 @@ public static class CombatPileSettingsConfig
             {
                 page.WithTitle(ModSettingsText.Literal("Combat Piles"))
                     .WithModDisplayName(ModSettingsText.Literal(ModInfo.DisplayName))
-                    .WithDescriptionHidden()
+                    .WithDescription(ModSettingsText.Literal("View upgrades of in-combat card piles."))
                     .AddSection("upgrade_preview", section => section
                             .WithTitle(ModSettingsText.Literal("Upgrade Preview"))
                             .AddToggle("draw_pile", ModSettingsText.Literal("View Upgrades in Draw Pile"), DrawPileBinding)
                             .AddToggle("discard_pile", ModSettingsText.Literal("View Upgrades in Discard Pile"), DiscardPileBinding)
                             .AddToggle("exhaust_pile", ModSettingsText.Literal("View Upgrades in Exhaust Pile"), ExhaustPileBinding));
-            });
+            },
+            DataKey);
     }
 
-    public static bool IsCombatPileUpgradePreviewEnabled(PileType pileType)
+    public static bool IsUpgradePreviewEnabled(PileType pileType)
     {
         return pileType switch
         {
