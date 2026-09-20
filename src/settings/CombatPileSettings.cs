@@ -74,6 +74,7 @@ public static class CombatPileSettingsConfig
                 page.WithTitle(ModSettingsText.Literal("Combat Piles"))
                     .WithModDisplayName(ModSettingsText.Literal(ModInfo.DisplayName))
                     .WithDescription(ModSettingsText.Literal("View upgrades of in-combat card piles."))
+                    .WithVisibleOnHostSurfaces(ModSettingsHostSurface.All)
                     .AddSection("upgrade_preview", section => section
                             .WithTitle(ModSettingsText.Literal("Upgrade Preview"))
                             .AddToggle("draw_pile", ModSettingsText.Literal("View Upgrades in Draw Pile"), DrawPileBinding)

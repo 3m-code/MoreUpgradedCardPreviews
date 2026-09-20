@@ -52,6 +52,7 @@ public static class CardRewardSelectionScreenSettingsConfig
                 page.WithTitle(ModSettingsText.Literal("Card Rewards"))
                     .WithModDisplayName(ModSettingsText.Literal(ModInfo.DisplayName))
                     .WithDescription(ModSettingsText.Literal("View upgrades of post-combat card rewards."))
+                    .WithVisibleOnHostSurfaces(ModSettingsHostSurface.All)
                     .AddSection("upgrade_preview", section => section
                             .WithTitle(ModSettingsText.Literal("Upgrade Preview"))
                             .AddToggle("enabled", ModSettingsText.Literal("View Upgrades in Card Rewards"), UpgradePreviewBinding));
