@@ -2,7 +2,7 @@
 
 namespace MoreUpgradedRewardsPreviews.Settings.Configs;
 
-public sealed class CardGeneratorSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<CardGeneratorSelectionScreenSettings>
+public sealed class CardGeneratorSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<UpgradePreviewSettings>
 {
     public static readonly CardGeneratorSelectionScreenSettingsConfig Instance = new();
 
@@ -16,6 +16,6 @@ public sealed class CardGeneratorSelectionScreenSettingsConfig : SingleUpgradePr
             settingLabel: "View Upgrades in Card Generators",
             getEnabled: static settings => settings.UpgradePreviewEnabled,
             setEnabled: static (settings, value) => settings.UpgradePreviewEnabled = value,
-            defaultFactory: static () => new CardGeneratorSelectionScreenSettings())
+            defaultFactory: static () => new UpgradePreviewSettings())
     {}
 }

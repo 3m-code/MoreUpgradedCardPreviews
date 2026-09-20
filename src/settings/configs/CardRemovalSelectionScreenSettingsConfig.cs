@@ -2,7 +2,7 @@
 
 namespace MoreUpgradedRewardsPreviews.Settings.Configs;
 
-public sealed class CardRemovalSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<CardRemovalSelectionScreenSettings>
+public sealed class CardRemovalSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<UpgradePreviewSettings>
 {
     public static readonly CardRemovalSelectionScreenSettingsConfig Instance = new();
 
@@ -16,6 +16,6 @@ public sealed class CardRemovalSelectionScreenSettingsConfig : SingleUpgradePrev
             settingLabel: "View Upgrades in Card Removals",
             getEnabled: static settings => settings.UpgradePreviewEnabled,
             setEnabled: static (settings, value) => settings.UpgradePreviewEnabled = value,
-            defaultFactory: static () => new CardRemovalSelectionScreenSettings())
+            defaultFactory: static () => new UpgradePreviewSettings())
     {}
 }

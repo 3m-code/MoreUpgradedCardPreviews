@@ -7,12 +7,15 @@ public static class ModSettingsRegistry
     public static void Register()
     {
         CombatPileSettingsConfig.Instance.Register();
+        CardGeneratorSelectionScreenSettingsConfig.Instance.Register();
+        
         CardRewardSelectionScreenSettingsConfig.Instance.Register();
-        CardRemovalSelectionScreenSettingsConfig.Instance.Register();
+
         CardUpgradeSelectionScreenSettingsConfig.Instance.Register();
         CardTransformSelectionScreenSettingsConfig.Instance.Register();
+        
+        CardRemovalSelectionScreenSettingsConfig.Instance.Register();
         CardDuplicateSelectionScreenSettingsConfig.Instance.Register();
         CardEnchantSelectionScreenSettingsConfig.Instance.Register();
-        CardGeneratorSelectionScreenSettingsConfig.Instance.Register();
     }
 }
