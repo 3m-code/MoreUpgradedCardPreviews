@@ -7,25 +7,26 @@ using STS2RitsuLib;
 using STS2RitsuLib.Interop;
 
 using MoreUpgradedRewardsPreviews.Patches;
+using MoreUpgradedRewardsPreviews.Settings;
 
 namespace MoreUpgradedRewardsPreviews;
 
 [ModInitializer(nameof(Initialize))]
 public static class Main
 {
-    private const string ModId = "moreupgradedrewardspreviews";
-
     public static Logger Logger { get; private set; } = null!;
 
     public static void Initialize()
     {
         var assembly = Assembly.GetExecutingAssembly();
 
-        Logger = RitsuLibFramework.CreateLogger(ModId);
-        ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
+        Logger = RitsuLibFramework.CreateLogger(ModInfo.Id);
+        ModTypeDiscoveryHub.RegisterModAssembly(ModInfo.Id, assembly);
         RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
 
-        var patcher = RitsuLibFramework.CreatePatcher(ModId, "main");
+        ModSettingsRegistry.Register();
+
+        var patcher = RitsuLibFramework.CreatePatcher(ModInfo.Id, "main");
         CardRewardSelectionScreenPatch.AddTo(patcher);
         CardRemovalSelectionScreenPatch.AddTo(patcher);
         CardGeneratorSelectionScreenPatch.AddTo(patcher);

@@ -5,10 +5,11 @@ using Godot;
 using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 
-using MoreUpgradedRewardsPreviews.UI;
-
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
+
+using MoreUpgradedRewardsPreviews.UI;
+using MoreUpgradedRewardsPreviews.Settings;
 
 namespace MoreUpgradedRewardsPreviews.Patches;
 
@@ -30,6 +31,12 @@ public sealed class CardRewardSelectionScreenPatch : IModPatches
 
     public static void Postfix(NCardRewardSelectionScreen __instance)
     {
+        if (!CardRewardSelectionScreenSettingsConfig.IsUpgradePreviewEnabled())
+        {
+            Main.Logger.Info($"Upgrade preview toggle disabled for NCardRewardSelectionScreen. No toggle created.");
+            return;
+        }
+        
         UpgradePreviewToggle.TryCreate(__instance, showingUpgrades => ApplyUpgradePreview(__instance, showingUpgrades));
     }
 

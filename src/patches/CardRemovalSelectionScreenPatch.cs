@@ -5,7 +5,7 @@ using Godot;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
-
+using MoreUpgradedRewardsPreviews.Settings;
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
@@ -24,7 +24,7 @@ public sealed class CardRemovalSelectionScreenPatch : IModPatches
                 methodName: "ConnectSignalsAndInitGrid",
                 patchType: typeof(CardRemovalSelectionScreenPatch),
                 isCritical: true,
-                description: "Adds the upgrade preview toggle to the deck card selection screen."
+                description: "Adds the upgrade preview toggle to the deck card selection screen - removal."
             )
         );
     }
@@ -33,12 +33,19 @@ public sealed class CardRemovalSelectionScreenPatch : IModPatches
     {
         try
         {
+           
             var grid = __instance.GetNodeOrNull<NCardGrid>("%CardGrid");
             var previewContainer = __instance.GetNodeOrNull<Control>("%PreviewContainer");
 
             if (grid == null || previewContainer == null) return;
 
             if (__instance.GetNodeOrNull<NTickbox>("%Upgrades") != null) return;
+            
+            if (!CardRemovalSelectionScreenSettingsConfig.IsUpgradePreviewEnabled())
+            {
+                Main.Logger.Info($"Upgrade preview toggle disabled for NDeckCardSelectScreen. No toggle created.");
+                return;
+            }
 
             var toggle = UpgradePreviewToggle.TryCreate(
                 __instance,
