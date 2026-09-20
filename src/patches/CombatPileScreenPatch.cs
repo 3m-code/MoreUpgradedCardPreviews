@@ -37,7 +37,7 @@ public sealed class CombatPileScreenPatch : IModPatches
 
             if (!CombatPileSettingsConfig.IsUpgradePreviewEnabled(pileType))
             {
-                Main.Logger.Info($"Upgrade preview toggle disabled for {pileType}. No toggle created.");
+                Main.Logger.Info($"Upgrade preview toggle disabled for {pileType} pile. No toggle created.");
                 return;
             }
 
@@ -63,7 +63,7 @@ public sealed class CombatPileScreenPatch : IModPatches
                 return;
             }
 
-            Main.Logger.Info($"Upgrade preview toggle created for {pileType}.");
+            Main.Logger.Info($"Upgrade preview toggle created for {pileType} pile.");
         }
         catch (Exception ex)
         {
