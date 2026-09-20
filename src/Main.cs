@@ -29,6 +29,8 @@ public static class Main
         var patcher = RitsuLibFramework.CreatePatcher(ModInfo.Id, "main");
         CardRewardSelectionScreenPatch.AddTo(patcher);
         CardRemovalSelectionScreenPatch.AddTo(patcher);
+        CardUpgradeSelectionScreenPatch.AddTo(patcher);
+        CardTransformSelectionScreenPatch.AddTo(patcher);
         CardDuplicateSelectionScreenPatch.AddTo(patcher);
         CardEnchantSelectionScreenPatch.AddTo(patcher);
         CardGeneratorSelectionScreenPatch.AddTo(patcher);
