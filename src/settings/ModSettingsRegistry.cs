@@ -10,6 +10,7 @@ public static class ModSettingsRegistry
         CardRewardSelectionScreenSettingsConfig.Instance.Register();
         CardRemovalSelectionScreenSettingsConfig.Instance.Register();
         CardDuplicateSelectionScreenSettingsConfig.Instance.Register();
+        CardEnchantSelectionScreenSettingsConfig.Instance.Register();
         CardGeneratorSelectionScreenSettingsConfig.Instance.Register();
     }
 }

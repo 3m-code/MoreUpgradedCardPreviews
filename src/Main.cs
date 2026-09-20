@@ -30,6 +30,7 @@ public static class Main
         CardRewardSelectionScreenPatch.AddTo(patcher);
         CardRemovalSelectionScreenPatch.AddTo(patcher);
         CardDuplicateSelectionScreenPatch.AddTo(patcher);
+        CardEnchantSelectionScreenPatch.AddTo(patcher);
         CardGeneratorSelectionScreenPatch.AddTo(patcher);
         CombatPileScreenPatch.AddTo(patcher);
         

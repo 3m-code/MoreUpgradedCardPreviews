@@ -34,6 +34,9 @@ public sealed class CardDuplicateSelectionScreenPatch : DeckCardSelectUpgradePre
     
     public static void Postfix(NDeckCardSelectScreen __result, CardSelectorPrefs prefs)
     {
+        // CardSelectorPrefs has no DuplicateSelectionPrompt
+        // This prompt is currently only used by Dolly's Mirror relic.
+        // if (prefs.Prompt.GetRawText() != CardSelectorPrefs.DuplicateSelectionPrompt.GetRawText()) return;
         var dollysMirrorPrompt  = new LocString("relics", $"{ModelDb.GetId<DollysMirror>().Entry}.selectionScreenPrompt");
         if (prefs.Prompt.GetRawText() != dollysMirrorPrompt.GetRawText()) return; 
             
