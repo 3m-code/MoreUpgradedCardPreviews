@@ -252,12 +252,20 @@ public sealed class UpgradePreviewToggle
         }
     }
 
-    private void Dispose()
+    public void Dispose()
     {
         if (_disposed) return;
         _disposed = true;
 
         _tickbox.Toggled -= OnToggled;
         UpgradePreviewManager.Instance.OnToggleStateChanged -= OnManagerStateChanged;
+        
+        if (GodotObject.IsInstanceValid(_container))
+        {
+            var parent = _container.GetParent();
+            if (parent != null) parent.RemoveChild(_container);
+
+            _container.QueueFree();
+        }
     }
 }

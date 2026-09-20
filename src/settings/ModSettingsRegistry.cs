@@ -1,12 +1,14 @@
-﻿namespace MoreUpgradedRewardsPreviews.Settings;
+﻿using MoreUpgradedRewardsPreviews.Settings.Configs;
+
+namespace MoreUpgradedRewardsPreviews.Settings;
 
 public static class ModSettingsRegistry
 {
     public static void Register()
     {
-        CardRewardSelectionScreenSettingsConfig.Register();
-        CardGeneratorSelectionScreenSettingsConfig.Register();
-        CardRemovalSelectionScreenSettingsConfig.Register();
-        CombatPileSettingsConfig.Register();
+        CardRewardSelectionScreenSettingsConfig.Instance.Register();
+        CardRemovalSelectionScreenSettingsConfig.Instance.Register();
+        CardGeneratorSelectionScreenSettingsConfig.Instance.Register();
+        CombatPileSettingsConfig.Instance.Register();
     }
 }

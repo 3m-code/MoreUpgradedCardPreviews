@@ -4,19 +4,21 @@ using System.Linq;
 using Godot;
 
 using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
-using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
-using MoreUpgradedRewardsPreviews.UI;
-using MoreUpgradedRewardsPreviews.Settings;
+using MoreUpgradedRewardsPreviews.Core;
+using MoreUpgradedRewardsPreviews.Settings.Configs;
 
 namespace MoreUpgradedRewardsPreviews.Patches;
 
-public sealed class CardGeneratorSelectionScreenPatch : IModPatches
+public sealed class CardGeneratorSelectionScreenPatch : UpgradePreviewPatch<NChooseACardSelectionScreen>, IModPatches
 {
+    private CardGeneratorSelectionScreenPatch(NChooseACardSelectionScreen screen) : base(screen) {}
+
     public static void AddTo(ModPatcher patcher)
     {
         patcher.RegisterPatch(
@@ -35,39 +37,45 @@ public sealed class CardGeneratorSelectionScreenPatch : IModPatches
     {
         try
         {
-            if (!CardGeneratorSelectionScreenSettingsConfig.IsUpgradePreviewEnabled())
-            {
-                Main.Logger.Info($"Upgrade preview toggle disabled for NCardRewardSelectionScreen. No toggle created.");
-                return;
-            }
-            
-            var cardRow = __instance.GetNodeOrNull<Control>("CardRow");
-            if (cardRow == null) return;
-
-            var toggle = UpgradePreviewToggle.TryCreate(
-                __instance,
-                showingUpgrades =>
-                {
-                    if (!GodotObject.IsInstanceValid(__instance) || !GodotObject.IsInstanceValid(cardRow)) return;
-
-                    foreach (var holder in cardRow.GetChildren().OfType<NGridCardHolder>())
-                    {
-                        if (GodotObject.IsInstanceValid(holder) && holder.CardModel.IsUpgradable)
-                        {
-                            holder.SetIsPreviewingUpgrade(showingUpgrades);
-                        }
-                    }
-                });
-            
-            var peekButton = __instance.GetNodeOrNull<NPeekButton>("%PeekButton");
-            if (toggle != null && peekButton != null)
-            {
-                peekButton.AddTargets(toggle.Container);
-            }
+            new CardGeneratorSelectionScreenPatch(__instance).Attach();
         }
         catch (Exception ex)
         {
             Main.Logger.Error($"Failed to add upgrade preview toggle to {__instance.GetType().Name}: {ex}");
         }
+    }
+
+    protected override bool IsEnabled()
+    {
+        return CardGeneratorSelectionScreenSettingsConfig.Instance.IsUpgradePreviewEnabled();
+    }
+
+    protected override void SubscribeToSettingChanges(Action<bool> handler)
+    {
+        CardGeneratorSelectionScreenSettingsConfig.Instance.UpgradePreviewEnabledChanged += handler;
+    }
+
+    protected override void UnsubscribeFromSettingChanges(Action<bool> handler)
+    {
+        CardGeneratorSelectionScreenSettingsConfig.Instance.UpgradePreviewEnabledChanged -= handler;
+    }
+
+    protected override void ApplyPreview(bool showingUpgrades)
+    {
+        var cardRow = Screen.GetNodeOrNull<Control>("CardRow");
+        if (cardRow == null) return;
+
+        foreach (var holder in cardRow.GetChildren().OfType<NGridCardHolder>())
+        {
+            if (!GodotObject.IsInstanceValid(holder)) continue;
+            if (!holder.CardModel.IsUpgradable) continue;
+
+            holder.SetIsPreviewingUpgrade(showingUpgrades);
+        }
+    }
+
+    protected override NPeekButton? GetPeekButton()
+    {
+        return Screen.GetNodeOrNull<NPeekButton>("%PeekButton");
     }
 }

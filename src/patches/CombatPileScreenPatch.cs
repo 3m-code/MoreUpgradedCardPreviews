@@ -1,20 +1,21 @@
 ﻿using System;
 
-using Godot;
-
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Screens;
+
+using MoreUpgradedRewardsPreviews.Core;
+using MoreUpgradedRewardsPreviews.Settings.Configs;
 
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
-using MoreUpgradedRewardsPreviews.Settings;
-using MoreUpgradedRewardsPreviews.UI;
-
 namespace MoreUpgradedRewardsPreviews.Patches;
 
-public sealed class CombatPileScreenPatch : IModPatches
+public sealed class CombatPileScreenPatch : UpgradePreviewPatch<NCardPileScreen>, IModPatches
 {
+    private CombatPileScreenPatch(NCardPileScreen screen) : base(screen) {}
+
     public static void AddTo(ModPatcher patcher)
     {
         patcher.RegisterPatch(
@@ -33,41 +34,60 @@ public sealed class CombatPileScreenPatch : IModPatches
     {
         try
         {
-            var pileType = __instance.Pile.Type;
-
-            if (!CombatPileSettingsConfig.IsUpgradePreviewEnabled(pileType))
-            {
-                Main.Logger.Info($"Upgrade preview toggle disabled for {pileType} pile. No toggle created.");
-                return;
-            }
-
-            var grid = __instance.GetNodeOrNull<NCardGrid>("CardGrid");
-            if (grid == null)
-            {
-                Main.Logger.Error($"Could not find CardGrid on NCardPileScreen for {pileType} pile.");
-                return;
-            }
-
-            var toggle = UpgradePreviewToggle.TryCreate(
-                __instance,
-                showingUpgrades =>
-                {
-                    if (!GodotObject.IsInstanceValid(__instance) || !GodotObject.IsInstanceValid(grid)) return;
-
-                    grid.IsShowingUpgrades = showingUpgrades;
-                });
-
-            if (toggle == null)
-            {
-                Main.Logger.Error($"Failed to create upgrade preview toggle for {pileType} pile.");
-                return;
-            }
-
-            Main.Logger.Info($"Upgrade preview toggle created for {pileType} pile.");
+            new CombatPileScreenPatch(__instance).Attach();
         }
         catch (Exception ex)
         {
-            Main.Logger.Error($"Failed to add upgrade preview toggle to NCardPileScreen: {ex}");
+            Main.Logger.Error($"Failed to add upgrade preview toggle to {__instance.GetType().Name}: {ex}");
         }
+    }
+
+    protected override bool IsEnabled()
+    {
+        return CombatPileSettingsConfig.Instance.IsUpgradePreviewEnabled(Screen.Pile.Type);
+    }
+
+    protected override void SubscribeToSettingChanges(Action<bool> handler)
+    {
+        switch (Screen.Pile.Type)
+        {
+            case PileType.Draw:
+                CombatPileSettingsConfig.Instance.DrawPilePreviewEnabledChanged += handler;
+                break;
+
+            case PileType.Discard:
+                CombatPileSettingsConfig.Instance.DiscardPilePreviewEnabledChanged += handler;
+                break;
+
+            case PileType.Exhaust:
+                CombatPileSettingsConfig.Instance.ExhaustPilePreviewEnabledChanged += handler;
+                break;
+        }
+    }
+
+    protected override void UnsubscribeFromSettingChanges(Action<bool> handler)
+    {
+        switch (Screen.Pile.Type)
+        {
+            case PileType.Draw:
+                CombatPileSettingsConfig.Instance.DrawPilePreviewEnabledChanged -= handler;
+                break;
+
+            case PileType.Discard:
+                CombatPileSettingsConfig.Instance.DiscardPilePreviewEnabledChanged -= handler;
+                break;
+
+            case PileType.Exhaust:
+                CombatPileSettingsConfig.Instance.ExhaustPilePreviewEnabledChanged -= handler;
+                break;
+        }
+    }
+
+    protected override void ApplyPreview(bool showingUpgrades)
+    {
+        var grid = Screen.GetNodeOrNull<NCardGrid>("CardGrid");
+        if (grid == null) return;
+
+        grid.IsShowingUpgrades = showingUpgrades;
     }
 }
