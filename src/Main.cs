@@ -27,14 +27,21 @@ public static class Main
         ModSettingsRegistry.Register();
 
         var patcher = RitsuLibFramework.CreatePatcher(ModInfo.Id, "main");
+        //In-combat
+        CombatPileScreenPatch.AddTo(patcher);
+        CardGeneratorSelectionScreenPatch.AddTo(patcher);
+        
+        //Post-combat
         CardRewardSelectionScreenPatch.AddTo(patcher);
-        CardRemovalSelectionScreenPatch.AddTo(patcher);
+        
+        //Vanilla card selection screens
         CardUpgradeSelectionScreenPatch.AddTo(patcher);
         CardTransformSelectionScreenPatch.AddTo(patcher);
+        
+        //Card selection screens
+        CardRemovalSelectionScreenPatch.AddTo(patcher);
         CardDuplicateSelectionScreenPatch.AddTo(patcher);
         CardEnchantSelectionScreenPatch.AddTo(patcher);
-        CardGeneratorSelectionScreenPatch.AddTo(patcher);
-        CombatPileScreenPatch.AddTo(patcher);
         
         RitsuLibFramework.ApplyRequiredPatcher(patcher, DisableMod);
     }
