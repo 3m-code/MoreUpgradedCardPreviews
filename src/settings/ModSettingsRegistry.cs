@@ -6,6 +6,7 @@ public static class ModSettingsRegistry
     {
         CardRewardSelectionScreenSettingsConfig.Register();
         CardGeneratorSelectionScreenSettingsConfig.Register();
+        CardRemovalSelectionScreenSettingsConfig.Register();
         CombatPileSettingsConfig.Register();
     }
 }
