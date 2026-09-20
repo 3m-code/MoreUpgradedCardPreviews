@@ -5,16 +5,20 @@ using Godot;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
-using MoreUpgradedRewardsPreviews.Settings;
+
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
+using MoreUpgradedRewardsPreviews.Core;
 using MoreUpgradedRewardsPreviews.UI;
+using MoreUpgradedRewardsPreviews.Settings.Configs;
 
 namespace MoreUpgradedRewardsPreviews.Patches;
 
-public sealed class CardRemovalSelectionScreenPatch : IModPatches
+public sealed class CardRemovalSelectionScreenPatch : UpgradePreviewPatch<NDeckCardSelectScreen>, IModPatches
 {
+    private CardRemovalSelectionScreenPatch(NDeckCardSelectScreen screen) : base(screen) {}
+
     public static void AddTo(ModPatcher patcher)
     {
         patcher.RegisterPatch(
@@ -33,39 +37,51 @@ public sealed class CardRemovalSelectionScreenPatch : IModPatches
     {
         try
         {
-           
-            var grid = __instance.GetNodeOrNull<NCardGrid>("%CardGrid");
-            var previewContainer = __instance.GetNodeOrNull<Control>("%PreviewContainer");
-
-            if (grid == null || previewContainer == null) return;
-
-            if (__instance.GetNodeOrNull<NTickbox>("%Upgrades") != null) return;
-            
-            if (!CardRemovalSelectionScreenSettingsConfig.IsUpgradePreviewEnabled())
-            {
-                Main.Logger.Info($"Upgrade preview toggle disabled for NDeckCardSelectScreen. No toggle created.");
-                return;
-            }
-
-            var toggle = UpgradePreviewToggle.TryCreate(
-                __instance,
-                showingUpgrades =>
-                {
-                    if (!GodotObject.IsInstanceValid(grid)) return;
-
-                    grid.IsShowingUpgrades = showingUpgrades;
-                });
-            if (toggle == null) return;
-
-            var toggleContainer = __instance.GetNodeOrNull<Control>("UpgradePreviewToggleContainer");
-            if (toggleContainer == null) return;
-
-            int previewIndex = previewContainer.GetIndex();
-            __instance.MoveChild(toggleContainer, previewIndex);
+            new CardRemovalSelectionScreenPatch(__instance).Attach();
         }
         catch (Exception ex)
         {
             Main.Logger.Error($"Failed to add upgrade preview toggle to {__instance.GetType().Name}: {ex}");
         }
+    }
+
+    protected override bool IsEnabled()
+    {
+        return CardRemovalSelectionScreenSettingsConfig.Instance.IsUpgradePreviewEnabled();
+    }
+
+    protected override bool CanAttach()
+    {
+        return Screen.GetNodeOrNull<NTickbox>("%Upgrades") == null;
+    }
+    
+    protected override void SubscribeToSettingChanges(Action<bool> handler)
+    {
+        CardRemovalSelectionScreenSettingsConfig.Instance.UpgradePreviewEnabledChanged += handler;
+    }
+
+    protected override void UnsubscribeFromSettingChanges(Action<bool> handler)
+    {
+        CardRemovalSelectionScreenSettingsConfig.Instance.UpgradePreviewEnabledChanged -= handler;
+    }
+
+    protected override void ApplyPreview(bool showingUpgrades)
+    {
+        var grid = Screen.GetNodeOrNull<NCardGrid>("%CardGrid");
+        if (grid == null) return;
+
+        grid.IsShowingUpgrades = showingUpgrades;
+    }
+
+    protected override void OnToggleCreated(UpgradePreviewToggle toggle)
+    {
+        var previewContainer = Screen.GetNodeOrNull<Control>("%PreviewContainer");
+        if (previewContainer == null) return;
+
+        var toggleContainer = toggle.Container;
+        if (!GodotObject.IsInstanceValid(toggleContainer)) return;
+
+        var previewIndex = previewContainer.GetIndex();
+        Screen.MoveChild(toggleContainer, previewIndex);
     }
 }
