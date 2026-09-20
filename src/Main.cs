@@ -29,6 +29,7 @@ public static class Main
         CardRewardSelectionScreenPatch.AddTo(patcher);
         CardRemovalSelectionScreenPatch.AddTo(patcher);
         CardGeneratorSelectionScreenPatch.AddTo(patcher);
+        CombatPileScreenPatch.AddTo(patcher);
         
         RitsuLibFramework.ApplyRequiredPatcher(patcher, DisableMod);
     }
