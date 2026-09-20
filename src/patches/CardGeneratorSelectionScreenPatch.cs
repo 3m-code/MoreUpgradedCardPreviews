@@ -11,6 +11,7 @@ using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
 using MoreUpgradedRewardsPreviews.UI;
+using MoreUpgradedRewardsPreviews.Settings;
 
 namespace MoreUpgradedRewardsPreviews.Patches;
 
@@ -34,6 +35,12 @@ public sealed class CardGeneratorSelectionScreenPatch : IModPatches
     {
         try
         {
+            if (!CardGeneratorSelectionScreenSettingsConfig.IsUpgradePreviewEnabled())
+            {
+                Main.Logger.Info($"Upgrade preview toggle disabled for NCardRewardSelectionScreen. No toggle created.");
+                return;
+            }
+            
             var cardRow = __instance.GetNodeOrNull<Control>("CardRow");
             if (cardRow == null) return;
 
