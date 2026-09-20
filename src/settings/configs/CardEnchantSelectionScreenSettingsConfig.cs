@@ -2,7 +2,7 @@
 
 namespace MoreUpgradedRewardsPreviews.Settings.Configs;
 
-public sealed class CardEnchantSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<CardEnchantSelectionScreenSettings>
+public sealed class CardEnchantSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<UpgradePreviewSettings>
 {
     public static readonly CardEnchantSelectionScreenSettingsConfig Instance = new();
 
@@ -16,6 +16,6 @@ public sealed class CardEnchantSelectionScreenSettingsConfig : SingleUpgradePrev
             settingLabel: "View Upgrades in Card Enchants",
             getEnabled: static settings => settings.UpgradePreviewEnabled,
             setEnabled: static (settings, value) => settings.UpgradePreviewEnabled = value,
-            defaultFactory: static () => new CardEnchantSelectionScreenSettings())
+            defaultFactory: static () => new UpgradePreviewSettings())
     {}
 }

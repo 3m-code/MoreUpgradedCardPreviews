@@ -2,7 +2,7 @@
 
 namespace MoreUpgradedRewardsPreviews.Settings.Configs;
 
-public sealed class CardDuplicateSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<CardDuplicateSelectionScreenSettings>
+public sealed class CardDuplicateSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<UpgradePreviewSettings>
 {
     public static readonly CardDuplicateSelectionScreenSettingsConfig Instance = new();
 
@@ -16,6 +16,6 @@ public sealed class CardDuplicateSelectionScreenSettingsConfig : SingleUpgradePr
             settingLabel: "View Upgrades in Card Duplicate",
             getEnabled: static settings => settings.UpgradePreviewEnabled,
             setEnabled: static (settings, value) => settings.UpgradePreviewEnabled = value,
-            defaultFactory: static () => new CardDuplicateSelectionScreenSettings())
+            defaultFactory: static () => new UpgradePreviewSettings())
     {}
 }
