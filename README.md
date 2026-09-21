@@ -39,7 +39,7 @@ These screens already have an upgrade preview option in the base game:
 ## Installation
 ### Steam Workshop
 
-Subscribe to the mod through the [Slay the Spire 2 Workshop.](LINKKKKKKKKKKKKKKKKKKKKKKKK)
+Subscribe to the mod through the [Slay the Spire 2 Workshop.](https://steamcommunity.com/sharedfiles/filedetails/?id=3805681445)
 
 ### Manual installation
 Install [STS2-RitsuLib](https://github.com/BAKAOLC/STS2-RitsuLib/releases/) first.
