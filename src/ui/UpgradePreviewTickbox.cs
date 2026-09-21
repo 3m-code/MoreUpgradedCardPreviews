@@ -1,7 +1,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
-namespace MoreUpgradedRewardsPreviews.UI;
+namespace MoreUpgradedCardPreviews.UI;
 
 public sealed partial class UpgradePreviewTickbox : NTickbox
 {

@@ -9,10 +9,10 @@ using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
-using MoreUpgradedRewardsPreviews.Core;
-using MoreUpgradedRewardsPreviews.Settings.Configs;
+using MoreUpgradedCardPreviews.Core;
+using MoreUpgradedCardPreviews.Settings.Configs;
 
-namespace MoreUpgradedRewardsPreviews.Patches;
+namespace MoreUpgradedCardPreviews.Patches;
 
 public sealed class CardDuplicateSelectionScreenPatch : DeckCardSelectUpgradePreviewPatch, IModPatches
 {
@@ -22,7 +22,7 @@ public sealed class CardDuplicateSelectionScreenPatch : DeckCardSelectUpgradePre
     {
         patcher.RegisterPatch(
             new ModPatchInfo(
-                id: "moreupgradedrewardspreviews.card_duplicate_selection_screen",
+                id: $"{ModInfo.Id}.card_duplicate_selection_screen",
                 targetType: typeof(NDeckCardSelectScreen),
                 methodName: nameof(NDeckCardSelectScreen.Create),
                 patchType: typeof(CardDuplicateSelectionScreenPatch),

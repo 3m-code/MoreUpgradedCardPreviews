@@ -4,9 +4,9 @@ using Godot;
 
 using MegaCrit.Sts2.Core.Nodes.Combat;
 
-using MoreUpgradedRewardsPreviews.UI;
+using MoreUpgradedCardPreviews.UI;
 
-namespace MoreUpgradedRewardsPreviews.Core;
+namespace MoreUpgradedCardPreviews.Core;
 
 public abstract class UpgradePreviewPatch<TScreen>(TScreen screen) where TScreen : Control
 {

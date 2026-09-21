@@ -6,10 +6,10 @@ using MegaCrit.Sts2.Core.Modding;
 using STS2RitsuLib;
 using STS2RitsuLib.Interop;
 
-using MoreUpgradedRewardsPreviews.Patches;
-using MoreUpgradedRewardsPreviews.Settings;
+using MoreUpgradedCardPreviews.Patches;
+using MoreUpgradedCardPreviews.Settings;
 
-namespace MoreUpgradedRewardsPreviews;
+namespace MoreUpgradedCardPreviews;
 
 [ModInitializer(nameof(Initialize))]
 public static class Main

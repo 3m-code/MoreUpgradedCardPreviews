@@ -4,13 +4,13 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Screens;
 
-using MoreUpgradedRewardsPreviews.Core;
-using MoreUpgradedRewardsPreviews.Settings.Configs;
+using MoreUpgradedCardPreviews.Core;
+using MoreUpgradedCardPreviews.Settings.Configs;
 
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
-namespace MoreUpgradedRewardsPreviews.Patches;
+namespace MoreUpgradedCardPreviews.Patches;
 
 public sealed class CombatPileScreenPatch : UpgradePreviewPatch<NCardPileScreen>, IModPatches
 {
@@ -20,7 +20,7 @@ public sealed class CombatPileScreenPatch : UpgradePreviewPatch<NCardPileScreen>
     {
         patcher.RegisterPatch(
             new ModPatchInfo(
-                id: "moreupgradedrewardspreviews.combat_pile_screen",
+                id: $"{ModInfo.Id}.combat_pile_screen",
                 targetType: typeof(NCardPileScreen),
                 methodName: "_Ready",
                 patchType: typeof(CombatPileScreenPatch),

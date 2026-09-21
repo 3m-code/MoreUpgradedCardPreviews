@@ -5,10 +5,10 @@ using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
-using MoreUpgradedRewardsPreviews.Core;
-using MoreUpgradedRewardsPreviews.Settings.Configs;
+using MoreUpgradedCardPreviews.Core;
+using MoreUpgradedCardPreviews.Settings.Configs;
 
-namespace MoreUpgradedRewardsPreviews.Patches;
+namespace MoreUpgradedCardPreviews.Patches;
 
 public sealed class CardUpgradeSelectionScreenPatch : VanillaUpgradePreviewPatch<NDeckUpgradeSelectScreen>
 {

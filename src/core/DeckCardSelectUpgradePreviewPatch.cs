@@ -4,9 +4,9 @@ using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 
-using MoreUpgradedRewardsPreviews.UI;
+using MoreUpgradedCardPreviews.UI;
 
-namespace MoreUpgradedRewardsPreviews.Core;
+namespace MoreUpgradedCardPreviews.Core;
 
 public abstract class DeckCardSelectUpgradePreviewPatch(NDeckCardSelectScreen screen) : UpgradePreviewPatch<NDeckCardSelectScreen>(screen)
 {

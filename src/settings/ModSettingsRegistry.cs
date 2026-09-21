@@ -1,9 +1,9 @@
 ﻿using STS2RitsuLib;
 using STS2RitsuLib.Settings;
 
-using MoreUpgradedRewardsPreviews.Settings.Configs;
+using MoreUpgradedCardPreviews.Settings.Configs;
 
-namespace MoreUpgradedRewardsPreviews.Settings;
+namespace MoreUpgradedCardPreviews.Settings;
 
 public static class ModSettingsRegistry
 {
@@ -50,7 +50,7 @@ public static class ModSettingsRegistry
                         .AddToggle("discard_pile", ModSettingsText.Literal("View Upgrades in Discard Pile"), CombatPileSettingsConfig.Instance.DiscardPileBinding)
                         .AddToggle("exhaust_pile", ModSettingsText.Literal("View Upgrades in Exhaust Pile"), CombatPileSettingsConfig.Instance.ExhaustPileBinding))
                     .AddSection("card_generator", section => section.WithTitle(ModSettingsText.Literal("Card Generator"))
-                        .AddToggle("upgrade_preview", ModSettingsText.Literal("View Upgrades when getting a card"), CardGeneratorSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding));
+                        .AddToggle("upgrade_preview", ModSettingsText.Literal("View Upgrades when choosing cards from Relics, Potions or Card effects"), CardGeneratorSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding));
             },
             "in_combat");
     }

@@ -4,7 +4,7 @@ using STS2RitsuLib;
 using STS2RitsuLib.Settings;
 using STS2RitsuLib.Utils.Persistence;
 
-namespace MoreUpgradedRewardsPreviews.Core;
+namespace MoreUpgradedCardPreviews.Core;
 
 public abstract class SingleUpgradePreviewSettingsConfig<TSettings> where TSettings : class, new()
 {

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="More Upgraded Rewards Previews PCK"
+config/name="More Upgraded Card Previews PCK"
 config/features=PackedStringArray("4.5")
 
 [display]

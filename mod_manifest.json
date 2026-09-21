@@ -1,16 +1,16 @@
 {
-  "id": "MoreUpgradedRewardsPreviews",
-  "name": "More Upgraded Rewards Previews",
+  "id": "moreupgradedcardpreviews",
+  "name": "More Upgraded Card Previews",
   "author": "3m-code",
-  "description": "Adds 'Show Upgrades' toggle to all card selection screens",
-  "version": "v0.8.3",
-  "min_game_version": "0.107.0",
+  "description": "Adds upgrade previews to card rewards, card selection screens, and combat card piles.",
+  "version": "v1.0.0",
+  "min_game_version": "0.107.1",
   "has_pck": true,
   "has_dll": true,
   "affects_gameplay": false,
   "dependencies": [
-    { "id": "STS2-RitsuLib" }
+    { "id": "STS2-RitsuLib", "version": "0.6.2" }
   ],
-  "entrypoint": "MoreUpgradedRewardsPreviews.Main",
-  "pck_name": "MoreUpgradedRewardsPreviews"
+  "entrypoint": "MoreUpgradedCardPreviews.Main",
+  "pck_name": "MoreUpgradedCardPreviews"
 }
