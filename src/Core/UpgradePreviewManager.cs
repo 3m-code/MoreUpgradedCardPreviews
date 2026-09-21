@@ -33,8 +33,7 @@ public class UpgradePreviewManager
         if (_isShowingUpgrades == show) return;
         _isShowingUpgrades = show;
         
-        Main.Logger.Info($"Upgrade preview state changed to: {show}");
-
+        //Main.Logger.Info($"Upgrade preview state changed to: {show}");
         OnToggleStateChanged?.Invoke(show);
     }
 
