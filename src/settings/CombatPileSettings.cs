@@ -1,4 +1,4 @@
-﻿namespace MoreUpgradedRewardsPreviews.Settings;
+﻿namespace MoreUpgradedCardPreviews.Settings;
 
 public sealed class CombatPileSettings
 {

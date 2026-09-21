@@ -5,10 +5,10 @@ using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
-using MoreUpgradedRewardsPreviews.Core;
-using MoreUpgradedRewardsPreviews.Settings.Configs;
+using MoreUpgradedCardPreviews.Core;
+using MoreUpgradedCardPreviews.Settings.Configs;
 
-namespace MoreUpgradedRewardsPreviews.Patches;
+namespace MoreUpgradedCardPreviews.Patches;
 
 public sealed class CardTransformSelectionScreenPatch : VanillaUpgradePreviewPatch<NDeckTransformSelectScreen>
 {
@@ -18,7 +18,7 @@ public sealed class CardTransformSelectionScreenPatch : VanillaUpgradePreviewPat
     {
         patcher.RegisterPatch(
             new ModPatchInfo(
-                id: "deck_transform_selection_screen_upgrade_preview",
+                id: $"{ModInfo.Id}.deck_transform_selection_screen",
                 targetType: typeof(NDeckTransformSelectScreen),
                 methodName: nameof(NDeckTransformSelectScreen._Ready),
                 patchType: typeof(CardTransformSelectionScreenPatch),

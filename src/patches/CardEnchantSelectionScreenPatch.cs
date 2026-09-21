@@ -9,11 +9,11 @@ using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
-using MoreUpgradedRewardsPreviews.Core;
-using MoreUpgradedRewardsPreviews.Settings.Configs;
-using MoreUpgradedRewardsPreviews.UI;
+using MoreUpgradedCardPreviews.Core;
+using MoreUpgradedCardPreviews.Settings.Configs;
+using MoreUpgradedCardPreviews.UI;
 
-namespace MoreUpgradedRewardsPreviews.Patches;
+namespace MoreUpgradedCardPreviews.Patches;
 
 public sealed class CardEnchantSelectionScreenPatch : UpgradePreviewPatch<NDeckEnchantSelectScreen>, IModPatches
 {
@@ -23,7 +23,7 @@ public sealed class CardEnchantSelectionScreenPatch : UpgradePreviewPatch<NDeckE
     {
         patcher.RegisterPatch(
             new ModPatchInfo(
-                id: "moreupgradedrewardspreviews.card_enchant_selection_screen",
+                id: $"{ModInfo.Id}.card_enchant_selection_screen",
                 targetType: typeof(NDeckEnchantSelectScreen),
                 methodName: nameof(NDeckEnchantSelectScreen._Ready),
                 patchType: typeof(CardEnchantSelectionScreenPatch),

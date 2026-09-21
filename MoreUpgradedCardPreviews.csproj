@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>MoreUpgradedRewardsPreviews</RootNamespace>
+    <RootNamespace>MoreUpgradedCardPreviews</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
@@ -20,7 +20,7 @@
     <PackageReference Include="STS2.RitsuLib" Version="0.6.2" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="MoreUpgradedRewardsPreviews.pck" />
+    <None Remove="MoreUpgradedCardPreviews.pck" />
     <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\compat-target.txt" />
     <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\mod_manifest.json" />
     <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\assets.zip" />
@@ -31,10 +31,8 @@
     <Content Include=".gitignore" />
     <Content Include="Directory.Build.props" />
     <Content Include="export_presets.cfg" />
-    <Content Include="Folder.DotSettings.user" />
-    <Content Include="index.js" />
     <Content Include="mod_manifest.json" />
-    <Content Include="MoreUpgradedRewardsPreviews\assets\ui\upgrade_preview_toggle.tscn" />
+    <Content Include="MoreUpgradedCardPreviews\assets\ui\upgrade_preview_toggle.tscn" />
     <Content Include="project.godot" />
     <Content Include="README.md" />
   </ItemGroup>

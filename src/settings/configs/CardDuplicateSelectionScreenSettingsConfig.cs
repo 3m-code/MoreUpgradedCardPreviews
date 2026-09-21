@@ -1,7 +1,6 @@
-﻿using MoreUpgradedRewardsPreviews.Core;
-using MoreUpgradedRewardsPreviews.Settings;
+﻿using MoreUpgradedCardPreviews.Core;
 
-namespace MoreUpgradedRewardsPreviews.Settings.Configs;
+namespace MoreUpgradedCardPreviews.Settings.Configs;
 
 public sealed class CardDuplicateSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<UpgradePreviewSettings>
 {

@@ -7,13 +7,13 @@ using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
-using MoreUpgradedRewardsPreviews.Core;
+using MoreUpgradedCardPreviews.Core;
 
-namespace MoreUpgradedRewardsPreviews.UI;
+namespace MoreUpgradedCardPreviews.UI;
 
 public sealed class UpgradePreviewToggle
 {
-    private const string ToggleScenePath = "res://MoreUpgradedRewardsPreviews/assets/ui/upgrade_preview_toggle.tscn";
+    private const string ToggleScenePath = "res://MoreUpgradedCardPreviews/assets/ui/upgrade_preview_toggle.tscn";
     private const string TickboxScriptPath = "res://src/ui/UpgradePreviewTickbox.cs";
     private const string GameTickboxScenePath = "res://scenes/ui/tickbox.tscn";
     private const string MegaLabelScriptPath = "res://addons/mega_text/MegaLabel.cs";

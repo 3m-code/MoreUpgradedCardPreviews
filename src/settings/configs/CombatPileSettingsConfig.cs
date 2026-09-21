@@ -6,7 +6,7 @@ using STS2RitsuLib;
 using STS2RitsuLib.Settings;
 using STS2RitsuLib.Utils.Persistence;
 
-namespace MoreUpgradedRewardsPreviews.Settings.Configs;
+namespace MoreUpgradedCardPreviews.Settings.Configs;
 
 public sealed class CombatPileSettingsConfig
 {

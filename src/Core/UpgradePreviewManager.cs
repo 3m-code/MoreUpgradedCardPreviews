@@ -1,6 +1,6 @@
 using System;
 
-namespace MoreUpgradedRewardsPreviews.Core;
+namespace MoreUpgradedCardPreviews.Core;
 
 /// <summary>
 /// Global state for the upgrade preview toggle.

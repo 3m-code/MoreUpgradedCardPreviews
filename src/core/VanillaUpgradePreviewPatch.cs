@@ -5,7 +5,7 @@ using Godot;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
-namespace MoreUpgradedRewardsPreviews.Core;
+namespace MoreUpgradedCardPreviews.Core;
 
 public abstract class VanillaUpgradePreviewPatch<TScreen> where TScreen : Control
 {

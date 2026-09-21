@@ -8,10 +8,10 @@ using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
-using MoreUpgradedRewardsPreviews.Core;
-using MoreUpgradedRewardsPreviews.Settings.Configs;
+using MoreUpgradedCardPreviews.Core;
+using MoreUpgradedCardPreviews.Settings.Configs;
 
-namespace MoreUpgradedRewardsPreviews.Patches;
+namespace MoreUpgradedCardPreviews.Patches;
 
 public sealed class CardRewardSelectionScreenPatch : UpgradePreviewPatch<NCardRewardSelectionScreen>, IModPatches
 {
@@ -21,7 +21,7 @@ public sealed class CardRewardSelectionScreenPatch : UpgradePreviewPatch<NCardRe
     {
         patcher.RegisterPatch(
             new ModPatchInfo(
-                id: "moreupgradedrewardspreviews.card_reward_selection_screen",
+                id: $"{ModInfo.Id}.card_reward_selection_screen",
                 targetType: typeof(NCardRewardSelectionScreen),
                 methodName: "_Ready",
                 patchType: typeof(CardRewardSelectionScreenPatch),
