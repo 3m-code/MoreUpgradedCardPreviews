@@ -64,12 +64,13 @@ public sealed class CardGeneratorSelectionScreenPatch : UpgradePreviewPatch<NCho
     {
         var cardRow = Screen.GetNodeOrNull<Control>("CardRow");
         if (cardRow == null) return;
-
-        foreach (var holder in cardRow.GetChildren().OfType<NGridCardHolder>())
+        
+        var children = cardRow.GetChildren();
+        foreach (var holder in children.OfType<NGridCardHolder>())
         {
             if (!GodotObject.IsInstanceValid(holder)) continue;
-            if (!holder.CardModel.IsUpgradable) continue;
-
+            if (!showingUpgrades && !holder.CardModel.IsUpgradable) continue;
+            
             holder.SetIsPreviewingUpgrade(showingUpgrades);
         }
     }

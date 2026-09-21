@@ -63,7 +63,8 @@ public sealed class CardRewardSelectionScreenPatch : UpgradePreviewPatch<NCardRe
         var cardRow = Screen.GetNodeOrNull<Control>("UI/CardRow");
         if (cardRow == null) return;
 
-        foreach (var holder in cardRow.GetChildren().OfType<NGridCardHolder>())
+        var children = cardRow.GetChildren();
+        foreach (var holder in children.OfType<NGridCardHolder>())
         {
             if (!GodotObject.IsInstanceValid(holder)) continue;
             if (!showingUpgrades && !holder.CardModel.IsUpgradable) continue;
