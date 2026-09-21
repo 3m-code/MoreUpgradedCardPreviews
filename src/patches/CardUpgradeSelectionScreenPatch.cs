@@ -18,7 +18,7 @@ public sealed class CardUpgradeSelectionScreenPatch : VanillaUpgradePreviewPatch
     {
         patcher.RegisterPatch(
             new ModPatchInfo(
-                id: "deck_upgrade_selection_screen_upgrade_preview",
+                id: $"{ModInfo.Id}.deck_upgrade_selection_screen",
                 targetType: typeof(NDeckUpgradeSelectScreen),
                 methodName: nameof(NDeckUpgradeSelectScreen._Ready),
                 patchType: typeof(CardUpgradeSelectionScreenPatch),
