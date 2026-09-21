@@ -31,13 +31,13 @@ public abstract class UpgradePreviewPatch<TScreen>(TScreen screen) where TScreen
     
     public void Attach()
     {
+        if (!GodotObject.IsInstanceValid(screen)) return;
         if (!CanAttach()) return;
         
         _settingChangedHandler = OnSettingChanged;
         _treeExitingHandler = Cleanup;
 
         SubscribeToSettingChanges(_settingChangedHandler);
-
         screen.TreeExiting += _treeExitingHandler;
 
         UpdateToggle(IsEnabled());
@@ -64,8 +64,9 @@ public abstract class UpgradePreviewPatch<TScreen>(TScreen screen) where TScreen
     private void CreateToggle()
     {
         if (_toggle != null) return;
+        if (!GodotObject.IsInstanceValid(screen)) return;
+        
         var toggle = UpgradePreviewToggle.TryCreate(screen, ApplyPreview);
-
         if (toggle == null) return;
 
         GetPeekButton()?.AddTargets(toggle.Container);

@@ -120,7 +120,7 @@ public sealed class UpgradePreviewToggle
             return null;
         }
 
-        Main.Logger.Info($"UpgradePreviewTickbox runtime type: {tickbox.GetType().FullName}");
+        //Main.Logger.Info($"UpgradePreviewTickbox runtime type: {tickbox.GetType().FullName}");
         return tickbox;
     }
 
