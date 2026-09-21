@@ -12,14 +12,13 @@ public sealed class CombatPileSettingsConfig
 {
     public static readonly CombatPileSettingsConfig Instance = new();
     
-    private const string PageId = "combat_piles";
     private const string DataKey = "combat_pile_settings";
     private const string FileName = "combat_pile_settings.json";
 
     public event Action<bool>? DrawPilePreviewEnabledChanged;
     public event Action<bool>? DiscardPilePreviewEnabledChanged;
-    public event Action<bool>? ExhaustPilePreviewEnabledChanged;
-
+    public event Action<bool>? ExhaustPilePreviewEnabledChanged; 
+    
     private readonly ModSettingsValueBinding<CombatPileSettings, bool> _drawPileBinding;
     private readonly ModSettingsValueBinding<CombatPileSettings, bool> _discardPileBinding; 
     private readonly ModSettingsValueBinding<CombatPileSettings, bool> _exhaustPileBinding;
@@ -48,10 +47,13 @@ public sealed class CombatPileSettingsConfig
         );
     }
     
+    public ModSettingsValueBinding<CombatPileSettings, bool> DrawPileBinding => _drawPileBinding;
+    public ModSettingsValueBinding<CombatPileSettings, bool> DiscardPileBinding => _discardPileBinding;
+    public ModSettingsValueBinding<CombatPileSettings, bool> ExhaustPileBinding => _exhaustPileBinding;
+    
     public void Register()
     {
         RegisterData();
-        RegisterSettingsPage();
     }
 
     public bool IsUpgradePreviewEnabled(PileType pileType)
@@ -115,24 +117,6 @@ public sealed class CombatPileSettingsConfig
                 autoCreateIfMissing: true
             );
         }
-    }
-
-    private void RegisterSettingsPage()
-    {
-        RitsuLibFramework.RegisterModSettings(
-            ModInfo.Id,
-            page =>
-            {
-                page.WithTitle(ModSettingsText.Literal("Combat Piles"))
-                    .WithModDisplayName(ModSettingsText.Literal(ModInfo.DisplayName))
-                    .WithDescription(ModSettingsText.Literal("View upgrades of in-combat card piles."))
-                    .WithVisibleOnHostSurfaces(ModSettingsHostSurface.All)
-                    .AddSection("upgrade_preview", section => section.WithTitle(ModSettingsText.Literal("Upgrade Preview"))
-                            .AddToggle("draw_pile", ModSettingsText.Literal("View Upgrades in Draw Pile"), _drawPileBinding)
-                            .AddToggle("discard_pile", ModSettingsText.Literal("View Upgrades in Discard Pile"), _discardPileBinding)
-                            .AddToggle("exhaust_pile", ModSettingsText.Literal("View Upgrades in Exhaust Pile"), _exhaustPileBinding));
-            },
-            PageId);
     }
 
     private void SetDrawPilePreviewEnabled(CombatPileSettings settings, bool value)

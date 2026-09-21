@@ -6,14 +6,9 @@ public sealed class CardRewardSelectionScreenSettingsConfig : SingleUpgradePrevi
 {
     public static readonly CardRewardSelectionScreenSettingsConfig Instance = new();
 
-    private CardRewardSelectionScreenSettingsConfig()
-        : base(
-            pageId: "card_rewards",
+    private CardRewardSelectionScreenSettingsConfig() : base(
             dataKey: "card_reward_selection_screen_settings",
             fileName: "card_reward_selection_screen_settings.json",
-            pageTitle: "Card Rewards",
-            pageDescription: "View upgrades of post-combat card rewards.",
-            settingLabel: "View Upgrades in Card Rewards",
             getEnabled: static settings => settings.UpgradePreviewEnabled,
             setEnabled: static (settings, value) => settings.UpgradePreviewEnabled = value,
             defaultFactory: static () => new UpgradePreviewSettings())
