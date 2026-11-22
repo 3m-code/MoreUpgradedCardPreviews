@@ -1,13 +1,10 @@
 using System.Reflection;
-
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
-
-using STS2RitsuLib;
-using STS2RitsuLib.Interop;
-
 using MoreUpgradedCardPreviews.Patches;
 using MoreUpgradedCardPreviews.Settings;
+using STS2RitsuLib;
+using STS2RitsuLib.Interop;
 
 namespace MoreUpgradedCardPreviews;
 
@@ -30,19 +27,20 @@ public static class Main
         //In-combat
         CombatPileScreenPatch.AddTo(patcher);
         CardGeneratorSelectionScreenPatch.AddTo(patcher);
-        
+
         //Post-combat
         CardRewardSelectionScreenPatch.AddTo(patcher);
-        
+
         //Vanilla card selection screens
         CardUpgradeSelectionScreenPatch.AddTo(patcher);
         CardTransformSelectionScreenPatch.AddTo(patcher);
-        
+
         //Card selection screens
         CardRemovalSelectionScreenPatch.AddTo(patcher);
         CardDuplicateSelectionScreenPatch.AddTo(patcher);
         CardEnchantSelectionScreenPatch.AddTo(patcher);
-        
+        CardBundleSelectionScreenPatch.AddTo(patcher);
+
         RitsuLibFramework.ApplyRequiredPatcher(patcher, DisableMod);
     }
 
