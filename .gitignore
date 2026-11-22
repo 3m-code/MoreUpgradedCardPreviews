@@ -6,9 +6,6 @@
 Deploy.local.props
 /build/
 
-# Godot
-.godot/
-
 # IDE
 .idea/
 *.DotSettings.user
@@ -17,8 +14,14 @@ Deploy.local.props
 obj/
 bin/
 
+# Godot
+.godot/
+
 # Godot export artifacts
 *.pck
+
+# Generated Godot imports
+MoreUpgradedCardPreviewsWorkspace/**/*.import
 
 # Game reference DLL
 lib/sts2.dll
