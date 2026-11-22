@@ -1,0 +1,22 @@
+<Project>
+    <Import Project="$(MSBuildThisFileDirectory)Deploy.local.props"
+            Condition="Exists('$(MSBuildThisFileDirectory)Deploy.local.props')"/>
+
+    <Target Name="DeployMoreUpgradedCardPreviews"
+            AfterTargets="Build"
+            Condition="'$(MSBuildProjectName)' == 'MoreUpgradedCardPreviews'
+                 and '$(Configuration)' == 'Debug'
+                 and '$(DeployModOnBuild)' == 'true'
+                 and '$(STS2_DEPLOY_IN_PROGRESS)' != '1'">
+
+        <Error Condition="'$(GodotExecutable)' == '' or !Exists('$(GodotExecutable)')"
+               Text="Missing GodotExecutable. Set a valid path in Deploy.local.props."/>
+
+        <Error Condition="'$(ModDeployDirectory)' == ''"
+               Text="Missing ModDeployDirectory in Deploy.local.props."/>
+
+        <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\scripts\deploy-dev.ps1&quot; -ProjectDirectory &quot;$(MSBuildProjectDirectory)&quot; -BuiltDll &quot;$(TargetPath)&quot; -GodotExecutable &quot;$(GodotExecutable)&quot; -ModsDirectory &quot;$(ModDeployDirectory)&quot;"
+              WorkingDirectory="$(MSBuildProjectDirectory)"
+              IgnoreExitCode="false"/>
+    </Target>
+</Project>

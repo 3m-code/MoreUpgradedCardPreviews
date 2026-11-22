@@ -3,13 +3,16 @@
   "name": "More Upgraded Card Previews",
   "author": "3m-code",
   "description": "Adds upgrade previews to card rewards, card selection screens, and combat card piles.",
-  "version": "v1.0.0",
+  "version": "v1.0.1",
   "min_game_version": "0.107.1",
   "has_pck": true,
   "has_dll": true,
   "affects_gameplay": false,
   "dependencies": [
-    { "id": "STS2-RitsuLib", "version": "0.6.2" }
+    {
+      "id": "STS2-RitsuLib",
+      "version": "0.6.2"
+    }
   ],
   "entrypoint": "MoreUpgradedCardPreviews.Main",
   "pck_name": "MoreUpgradedCardPreviews"
