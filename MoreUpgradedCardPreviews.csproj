@@ -1,40 +1,40 @@
 <Project Sdk="Godot.NET.Sdk/4.5.1">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>MoreUpgradedCardPreviews</RootNamespace>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
-    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <RootNamespace>MoreUpgradedCardPreviews</RootNamespace>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Reference Include="sts2">
-      <HintPath>lib\sts2.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    
-    <PackageReference Include="lamali.StS2.RefLib" Version="0.111.0-beta" />
-    <PackageReference Include="STS2.RitsuLib" Version="0.6.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="MoreUpgradedCardPreviews.pck" />
-    <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\compat-target.txt" />
-    <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\mod_manifest.json" />
-    <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\assets.zip" />
-    <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\RitsuLib.References.props" />
-    <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\ritsulib-variants.manifest" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include=".gitignore" />
-    <Content Include="Directory.Build.props" />
-    <Content Include="export_presets.cfg" />
-    <Content Include="mod_manifest.json" />
-    <Content Include="MoreUpgradedCardPreviews\assets\ui\upgrade_preview_toggle.tscn" />
-    <Content Include="project.godot" />
-    <Content Include="README.md" />
-  </ItemGroup>
+    <ItemGroup>
+        <Reference Include="sts2">
+            <HintPath>lib\sts2.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+
+        <PackageReference Include="lamali.StS2.RefLib" Version="0.111.0-beta"/>
+        <PackageReference Include="STS2.RitsuLib" Version="0.6.2"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove="MoreUpgradedCardPreviews.pck"/>
+        <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\compat-target.txt"/>
+        <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\mod_manifest.json"/>
+        <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\assets.zip"/>
+        <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\RitsuLib.References.props"/>
+        <None Remove="..\..\..\..\.nuget\packages\sts2.ritsulib\0.6.2\contentFiles\any\any\ritsulib-variants.manifest"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include=".gitignore"/>
+        <Content Include="Directory.Build.props"/>
+        <Content Include="export_presets.cfg"/>
+        <Content Include="mod_manifest.json"/>
+        <Content Include="MoreUpgradedCardPreviews\assets\ui\upgrade_preview_toggle.tscn"/>
+        <Content Include="project.godot"/>
+        <Content Include="README.md"/>
+    </ItemGroup>
 
 </Project>

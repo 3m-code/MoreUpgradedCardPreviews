@@ -1,7 +1,5 @@
 ﻿using System;
-
 using MegaCrit.Sts2.Core.Entities.Cards;
-
 using STS2RitsuLib;
 using STS2RitsuLib.Settings;
 using STS2RitsuLib.Utils.Persistence;
@@ -10,47 +8,44 @@ namespace MoreUpgradedCardPreviews.Settings.Configs;
 
 public sealed class CombatPileSettingsConfig
 {
-    public static readonly CombatPileSettingsConfig Instance = new();
-    
     private const string DataKey = "combat_pile_settings";
     private const string FileName = "combat_pile_settings.json";
+    public static readonly CombatPileSettingsConfig Instance = new();
 
-    public event Action<bool>? DrawPilePreviewEnabledChanged;
-    public event Action<bool>? DiscardPilePreviewEnabledChanged;
-    public event Action<bool>? ExhaustPilePreviewEnabledChanged; 
-    
-    private readonly ModSettingsValueBinding<CombatPileSettings, bool> _drawPileBinding;
-    private readonly ModSettingsValueBinding<CombatPileSettings, bool> _discardPileBinding; 
-    private readonly ModSettingsValueBinding<CombatPileSettings, bool> _exhaustPileBinding;
-        
     private CombatPileSettingsConfig()
     {
-        _drawPileBinding = new(
+        DrawPileBinding = new ModSettingsValueBinding<CombatPileSettings, bool>(
             ModInfo.Id,
             DataKey,
             SaveScope.Global,
             static settings => settings.DrawPilePreviewEnabled, SetDrawPilePreviewEnabled
         );
 
-        _discardPileBinding = new(
+        DiscardPileBinding = new ModSettingsValueBinding<CombatPileSettings, bool>(
             ModInfo.Id,
             DataKey,
             SaveScope.Global,
             static settings => settings.DiscardPilePreviewEnabled, SetDiscardPilePreviewEnabled
         );
 
-        _exhaustPileBinding = new(
+        ExhaustPileBinding = new ModSettingsValueBinding<CombatPileSettings, bool>(
             ModInfo.Id,
             DataKey,
             SaveScope.Global,
             static settings => settings.ExhaustPilePreviewEnabled, SetExhaustPilePreviewEnabled
         );
     }
-    
-    public ModSettingsValueBinding<CombatPileSettings, bool> DrawPileBinding => _drawPileBinding;
-    public ModSettingsValueBinding<CombatPileSettings, bool> DiscardPileBinding => _discardPileBinding;
-    public ModSettingsValueBinding<CombatPileSettings, bool> ExhaustPileBinding => _exhaustPileBinding;
-    
+
+    public ModSettingsValueBinding<CombatPileSettings, bool> DrawPileBinding { get; }
+
+    public ModSettingsValueBinding<CombatPileSettings, bool> DiscardPileBinding { get; }
+
+    public ModSettingsValueBinding<CombatPileSettings, bool> ExhaustPileBinding { get; }
+
+    public event Action<bool>? DrawPilePreviewEnabledChanged;
+    public event Action<bool>? DiscardPilePreviewEnabledChanged;
+    public event Action<bool>? ExhaustPilePreviewEnabledChanged;
+
     public void Register()
     {
         RegisterData();
@@ -60,9 +55,9 @@ public sealed class CombatPileSettingsConfig
     {
         return pileType switch
         {
-            PileType.Draw => _drawPileBinding.Read(),
-            PileType.Discard => _discardPileBinding.Read(),
-            PileType.Exhaust => _exhaustPileBinding.Read(),
+            PileType.Draw => DrawPileBinding.Read(),
+            PileType.Discard => DiscardPileBinding.Read(),
+            PileType.Exhaust => ExhaustPileBinding.Read(),
             _ => false
         };
     }
@@ -110,11 +105,11 @@ public sealed class CombatPileSettingsConfig
             var store = RitsuLibFramework.GetDataStore(ModInfo.Id);
 
             store.Register(
-                key: DataKey,
-                fileName: FileName,
-                scope: SaveScope.Global,
-                defaultFactory: () => new CombatPileSettings(),
-                autoCreateIfMissing: true
+                DataKey,
+                FileName,
+                SaveScope.Global,
+                () => new CombatPileSettings(),
+                true
             );
         }
     }

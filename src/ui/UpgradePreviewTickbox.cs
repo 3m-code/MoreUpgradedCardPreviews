@@ -10,21 +10,25 @@ public sealed partial class UpgradePreviewTickbox : NTickbox
         ConnectSignals();
     }
 
-    protected override void OnPress(){}
-    protected override void OnFocus(){}
-    protected override void OnUnfocus(){}
+    protected override void OnPress()
+    {
+    }
+
+    protected override void OnFocus()
+    {
+    }
+
+    protected override void OnUnfocus()
+    {
+    }
 
     protected override void OnRelease()
     {
         IsTicked = !IsTicked;
-        if(IsTicked)
-        {
+        if (IsTicked)
             SfxCmd.Play("event:/sfx/ui/clicks/ui_checkbox_on");
-        }
         else
-        {
             SfxCmd.Play("event:/sfx/ui/clicks/ui_checkbox_off");
-        }
 
         EmitSignalToggled(this);
     }

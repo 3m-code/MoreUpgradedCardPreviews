@@ -1,14 +1,13 @@
 ﻿using Godot;
-
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
-
 using MoreUpgradedCardPreviews.UI;
 
 namespace MoreUpgradedCardPreviews.Core;
 
-public abstract class DeckCardSelectUpgradePreviewPatch(NDeckCardSelectScreen screen) : UpgradePreviewPatch<NDeckCardSelectScreen>(screen)
+public abstract class DeckCardSelectUpgradePreviewPatch(NDeckCardSelectScreen screen)
+    : UpgradePreviewPatch<NDeckCardSelectScreen>(screen)
 {
     protected override void ApplyPreview(bool showingUpgrades)
     {

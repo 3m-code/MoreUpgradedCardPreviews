@@ -7,10 +7,11 @@ public sealed class CardRewardSelectionScreenSettingsConfig : SingleUpgradePrevi
     public static readonly CardRewardSelectionScreenSettingsConfig Instance = new();
 
     private CardRewardSelectionScreenSettingsConfig() : base(
-            dataKey: "card_reward_selection_screen_settings",
-            fileName: "card_reward_selection_screen_settings.json",
-            getEnabled: static settings => settings.UpgradePreviewEnabled,
-            setEnabled: static (settings, value) => settings.UpgradePreviewEnabled = value,
-            defaultFactory: static () => new UpgradePreviewSettings())
-    {}
+        "card_reward_selection_screen_settings",
+        "card_reward_selection_screen_settings.json",
+        static settings => settings.UpgradePreviewEnabled,
+        static (settings, value) => settings.UpgradePreviewEnabled = value,
+        static () => new UpgradePreviewSettings())
+    {
+    }
 }

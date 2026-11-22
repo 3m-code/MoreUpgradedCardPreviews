@@ -2,15 +2,17 @@
 
 namespace MoreUpgradedCardPreviews.Settings.Configs;
 
-public sealed class CardRemovalSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<UpgradePreviewSettings>
+public sealed class
+    CardRemovalSelectionScreenSettingsConfig : SingleUpgradePreviewSettingsConfig<UpgradePreviewSettings>
 {
     public static readonly CardRemovalSelectionScreenSettingsConfig Instance = new();
 
     private CardRemovalSelectionScreenSettingsConfig() : base(
-            dataKey: "card_removal_selection_screen_settings",
-            fileName: "card_removal_selection_screen_settings.json",
-            getEnabled: static settings => settings.UpgradePreviewEnabled,
-            setEnabled: static (settings, value) => settings.UpgradePreviewEnabled = value,
-            defaultFactory: static () => new UpgradePreviewSettings())
-    {}
+        "card_removal_selection_screen_settings",
+        "card_removal_selection_screen_settings.json",
+        static settings => settings.UpgradePreviewEnabled,
+        static (settings, value) => settings.UpgradePreviewEnabled = value,
+        static () => new UpgradePreviewSettings())
+    {
+    }
 }

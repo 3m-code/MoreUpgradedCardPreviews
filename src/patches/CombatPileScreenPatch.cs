@@ -1,12 +1,9 @@
 ﻿using System;
-
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Screens;
-
 using MoreUpgradedCardPreviews.Core;
 using MoreUpgradedCardPreviews.Settings.Configs;
-
 using STS2RitsuLib.Patching.Core;
 using STS2RitsuLib.Patching.Models;
 
@@ -14,18 +11,20 @@ namespace MoreUpgradedCardPreviews.Patches;
 
 public sealed class CombatPileScreenPatch : UpgradePreviewPatch<NCardPileScreen>, IModPatches
 {
-    private CombatPileScreenPatch(NCardPileScreen screen) : base(screen) {}
+    private CombatPileScreenPatch(NCardPileScreen screen) : base(screen)
+    {
+    }
 
     public static void AddTo(ModPatcher patcher)
     {
         patcher.RegisterPatch(
             new ModPatchInfo(
-                id: $"{ModInfo.Id}.combat_pile_screen",
-                targetType: typeof(NCardPileScreen),
-                methodName: "_Ready",
-                patchType: typeof(CombatPileScreenPatch),
-                isCritical: true,
-                description: "Adds the upgrade preview toggle to in-combat pile screens."
+                $"{ModInfo.Id}.combat_pile_screen",
+                typeof(NCardPileScreen),
+                "_Ready",
+                typeof(CombatPileScreenPatch),
+                true,
+                "Adds the upgrade preview toggle to in-combat pile screens."
             )
         );
     }

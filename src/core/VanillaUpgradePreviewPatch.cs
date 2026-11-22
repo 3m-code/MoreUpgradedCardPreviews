@@ -1,7 +1,5 @@
 ﻿using System;
-
 using Godot;
-
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
@@ -9,18 +7,19 @@ namespace MoreUpgradedCardPreviews.Core;
 
 public abstract class VanillaUpgradePreviewPatch<TScreen> where TScreen : Control
 {
-    private readonly TScreen _screen;
-
-    private NTickbox? _vanillaToggle;
-    private Node? _vanillaToggleParent;
-    private int _vanillaToggleIndex = -1;
-
     private Action<bool>? _settingChangedHandler;
     private Action? _treeExitingHandler;
 
-    protected VanillaUpgradePreviewPatch(TScreen screen) { _screen = screen;}
+    private NTickbox? _vanillaToggle;
+    private int _vanillaToggleIndex = -1;
+    private Node? _vanillaToggleParent;
 
-    protected TScreen Screen => _screen;
+    protected VanillaUpgradePreviewPatch(TScreen screen)
+    {
+        Screen = screen;
+    }
+
+    protected TScreen Screen { get; }
 
     protected abstract bool IsEnabled();
 
@@ -30,7 +29,7 @@ public abstract class VanillaUpgradePreviewPatch<TScreen> where TScreen : Contro
 
     public void Attach()
     {
-        _vanillaToggle = _screen.GetNodeOrNull<NTickbox>("%Upgrades");
+        _vanillaToggle = Screen.GetNodeOrNull<NTickbox>("%Upgrades");
         if (_vanillaToggle == null) return;
 
         var parent = _vanillaToggle.GetParent();
@@ -43,14 +42,14 @@ public abstract class VanillaUpgradePreviewPatch<TScreen> where TScreen : Contro
         _treeExitingHandler = Cleanup;
 
         SubscribeToSettingChanges(_settingChangedHandler);
-        _screen.TreeExiting += _treeExitingHandler;
+        Screen.TreeExiting += _treeExitingHandler;
 
         ApplySetting(IsEnabled());
     }
 
     private void OnSettingChanged(bool enabled)
     {
-        if (!GodotObject.IsInstanceValid(_screen)) return;
+        if (!GodotObject.IsInstanceValid(Screen)) return;
 
         ApplySetting(enabled);
     }
@@ -72,10 +71,7 @@ public abstract class VanillaUpgradePreviewPatch<TScreen> where TScreen : Contro
 
         SetPreview(false);
 
-        if (_vanillaToggle.GetParent() == _vanillaToggleParent)
-        {
-            _vanillaToggleParent.RemoveChild(_vanillaToggle);
-        }
+        if (_vanillaToggle.GetParent() == _vanillaToggleParent) _vanillaToggleParent.RemoveChild(_vanillaToggle);
     }
 
     private void RestoreVanillaToggle()
@@ -91,7 +87,7 @@ public abstract class VanillaUpgradePreviewPatch<TScreen> where TScreen : Contro
 
     private void SetPreview(bool showingUpgrades)
     {
-        var grid = _screen.GetNodeOrNull<NCardGrid>("%CardGrid");
+        var grid = Screen.GetNodeOrNull<NCardGrid>("%CardGrid");
         if (grid == null) return;
 
         grid.IsShowingUpgrades = showingUpgrades;

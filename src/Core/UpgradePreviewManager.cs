@@ -3,45 +3,41 @@ using System;
 namespace MoreUpgradedCardPreviews.Core;
 
 /// <summary>
-/// Global state for the upgrade preview toggle.
+///     Global state for the upgrade preview toggle.
 /// </summary>
 public class UpgradePreviewManager
 {
-    private static readonly UpgradePreviewManager _instance = new();
+    private UpgradePreviewManager()
+    {
+        IsShowingUpgrades = false;
+    }
 
-    private bool _isShowingUpgrades;
+    public static UpgradePreviewManager Instance { get; } = new();
+
+    /// <summary>
+    ///     Gets whether upgrade previews are currently enabled.
+    /// </summary>
+    public bool IsShowingUpgrades { get; private set; }
 
     public event Action<bool>? OnToggleStateChanged;
 
-    private UpgradePreviewManager()
-    {
-        _isShowingUpgrades = false;
-    }
-
-    public static UpgradePreviewManager Instance => _instance;
-
     /// <summary>
-    /// Gets whether upgrade previews are currently enabled.
-    /// </summary>
-    public bool IsShowingUpgrades => _isShowingUpgrades;
-
-    /// <summary>
-    /// Sets the upgrade preview state.
+    ///     Sets the upgrade preview state.
     /// </summary>
     public void SetShowingUpgrades(bool show)
     {
-        if (_isShowingUpgrades == show) return;
-        _isShowingUpgrades = show;
-        
+        if (IsShowingUpgrades == show) return;
+        IsShowingUpgrades = show;
+
         //Main.Logger.Info($"Upgrade preview state changed to: {show}");
         OnToggleStateChanged?.Invoke(show);
     }
 
     /// <summary>
-    /// Toggles the upgrade preview state.
+    ///     Toggles the upgrade preview state.
     /// </summary>
     public void ToggleShowingUpgrades()
     {
-        SetShowingUpgrades(!_isShowingUpgrades);
+        SetShowingUpgrades(!IsShowingUpgrades);
     }
 }
