@@ -1,4 +1,6 @@
-﻿using MoreUpgradedCardPreviews.Settings.Configs;
+﻿using MoreUpgradedCardPreviews.Compatibility;
+using MoreUpgradedCardPreviews.Patches;
+using MoreUpgradedCardPreviews.Settings.Configs;
 using STS2RitsuLib;
 using STS2RitsuLib.Settings;
 
@@ -26,6 +28,8 @@ public static class ModSettingsRegistry
         CardDuplicateSelectionScreenSettingsConfig.Instance.Register();
         CardEnchantSelectionScreenSettingsConfig.Instance.Register();
         CardBundleSelectionScreenSettingsConfig.Instance.Register();
+        if (GameCompatibility.IsSupported<BlitzStartingCardSelectionScreenPatch>())
+            BlitzStartingCardSelectionScreenSettingsConfig.Instance.Register();
     }
 
     private static void RegisterSettingsPages()
@@ -94,15 +98,23 @@ public static class ModSettingsRegistry
                             CardUpgradeSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
                         .AddToggle("card_transform", ModSettingsText.Literal("View Upgrades in Card Transform Screen"),
                             CardTransformSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding))
-                    .AddSection("added", section => section.WithTitle(ModSettingsText.Literal("Added"))
-                        .AddToggle("card_removal", ModSettingsText.Literal("View Upgrades in Card Removal Screen"),
-                            CardRemovalSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
-                        .AddToggle("card_duplicate", ModSettingsText.Literal("View Upgrades in Card Duplicate Screen"),
-                            CardDuplicateSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
-                        .AddToggle("card_enchant", ModSettingsText.Literal("View Upgrades in Card Enchant Screen"),
-                            CardEnchantSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
-                        .AddToggle("card_bundles", ModSettingsText.Literal("View Upgrades in Card Bundle Screen"),
-                            CardBundleSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding));
+                    .AddSection("added", section =>
+                    {
+                        section.WithTitle(ModSettingsText.Literal("Added"))
+                            .AddToggle("card_removal", ModSettingsText.Literal("View Upgrades in Card Removal Screen"),
+                                CardRemovalSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
+                            .AddToggle("card_duplicate",
+                                ModSettingsText.Literal("View Upgrades in Card Duplicate Screen"),
+                                CardDuplicateSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
+                            .AddToggle("card_enchant", ModSettingsText.Literal("View Upgrades in Card Enchant Screen"),
+                                CardEnchantSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
+                            .AddToggle("card_bundles", ModSettingsText.Literal("View Upgrades in Card Bundle Screen"),
+                                CardBundleSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding);
+
+                        if (GameCompatibility.IsSupported<BlitzStartingCardSelectionScreenPatch>())
+                            section.AddToggle("blitz_starting_cards", ModSettingsText.Literal("View Upgrades in Blitz Starting Card Selection"),
+                                BlitzStartingCardSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding);
+                    });
             },
             "selection_screens");
     }

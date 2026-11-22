@@ -27,6 +27,4 @@ MoreUpgradedCardPreviewsWorkspace/**/*.import
 lib/sts2.dll
 
 # Steam workshop
-MoreUpgradedCardPreviewsWorkspace/ModUploader-win-x64.zip
-MoreUpgradedCardPreviewsWorkspace/MoreUpgradedCardPreviewsWorkspace/content/
-MoreUpgradedCardPreviewsWorkspace/MoreUpgradedCardPreviewsWorkspace/workshop.json
+MoreUpgradedCardPreviewsWorkspace/

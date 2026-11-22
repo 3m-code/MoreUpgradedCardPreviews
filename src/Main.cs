@@ -40,6 +40,7 @@ public static class Main
         CardDuplicateSelectionScreenPatch.AddTo(patcher);
         CardEnchantSelectionScreenPatch.AddTo(patcher);
         CardBundleSelectionScreenPatch.AddTo(patcher);
+        BlitzStartingCardSelectionScreenPatch.AddTo(patcher);
 
         RitsuLibFramework.ApplyRequiredPatcher(patcher, DisableMod);
     }
