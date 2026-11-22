@@ -9,7 +9,10 @@
   "has_dll": true,
   "affects_gameplay": false,
   "dependencies": [
-    { "id": "STS2-RitsuLib", "version": "0.6.2" }
+    {
+      "id": "STS2-RitsuLib",
+      "version": "0.6.2"
+    }
   ],
   "entrypoint": "MoreUpgradedCardPreviews.Main",
   "pck_name": "MoreUpgradedCardPreviews"
