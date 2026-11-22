@@ -3,7 +3,7 @@
   "name": "More Upgraded Card Previews",
   "author": "3m-code",
   "description": "Adds upgrade previews to card rewards, card selection screens, and combat card piles.",
-  "version": "v1.0.1",
+  "version": "v1.1.0",
   "min_game_version": "0.107.1",
   "has_pck": true,
   "has_dll": true,

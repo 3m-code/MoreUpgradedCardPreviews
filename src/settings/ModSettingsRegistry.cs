@@ -1,7 +1,6 @@
-﻿using STS2RitsuLib;
+﻿using MoreUpgradedCardPreviews.Settings.Configs;
+using STS2RitsuLib;
 using STS2RitsuLib.Settings;
-
-using MoreUpgradedCardPreviews.Settings.Configs;
 
 namespace MoreUpgradedCardPreviews.Settings;
 
@@ -12,30 +11,31 @@ public static class ModSettingsRegistry
         RegisterSettingsData();
         RegisterSettingsPages();
     }
-    
+
     private static void RegisterSettingsData()
     {
         CombatPileSettingsConfig.Instance.Register();
         CardGeneratorSelectionScreenSettingsConfig.Instance.Register();
-        
+
         CardRewardSelectionScreenSettingsConfig.Instance.Register();
 
         CardUpgradeSelectionScreenSettingsConfig.Instance.Register();
         CardTransformSelectionScreenSettingsConfig.Instance.Register();
-        
+
         CardRemovalSelectionScreenSettingsConfig.Instance.Register();
         CardDuplicateSelectionScreenSettingsConfig.Instance.Register();
         CardEnchantSelectionScreenSettingsConfig.Instance.Register();
+        CardBundleSelectionScreenSettingsConfig.Instance.Register();
     }
-    
+
     private static void RegisterSettingsPages()
     {
         RegisterInCombatPage();
         RegisterPostCombatPage();
         RegisterSelectionScreensPage();
     }
-    
-        private static void RegisterInCombatPage()
+
+    private static void RegisterInCombatPage()
     {
         RitsuLibFramework.RegisterModSettings(
             ModInfo.Id,
@@ -46,11 +46,18 @@ public static class ModSettingsRegistry
                     .WithDescription(ModSettingsText.Literal("Settings for card selection and piles during combat."))
                     .WithVisibleOnHostSurfaces(ModSettingsHostSurface.All)
                     .AddSection("combat_piles", section => section.WithTitle(ModSettingsText.Literal("Combat Piles"))
-                        .AddToggle("draw_pile", ModSettingsText.Literal("View Upgrades in Draw Pile"), CombatPileSettingsConfig.Instance.DrawPileBinding)
-                        .AddToggle("discard_pile", ModSettingsText.Literal("View Upgrades in Discard Pile"), CombatPileSettingsConfig.Instance.DiscardPileBinding)
-                        .AddToggle("exhaust_pile", ModSettingsText.Literal("View Upgrades in Exhaust Pile"), CombatPileSettingsConfig.Instance.ExhaustPileBinding))
-                    .AddSection("card_generator", section => section.WithTitle(ModSettingsText.Literal("Card Generator"))
-                        .AddToggle("upgrade_preview", ModSettingsText.Literal("View Upgrades when choosing cards from Relics, Potions or Card effects"), CardGeneratorSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding));
+                        .AddToggle("draw_pile", ModSettingsText.Literal("View Upgrades in Draw Pile"),
+                            CombatPileSettingsConfig.Instance.DrawPileBinding)
+                        .AddToggle("discard_pile", ModSettingsText.Literal("View Upgrades in Discard Pile"),
+                            CombatPileSettingsConfig.Instance.DiscardPileBinding)
+                        .AddToggle("exhaust_pile", ModSettingsText.Literal("View Upgrades in Exhaust Pile"),
+                            CombatPileSettingsConfig.Instance.ExhaustPileBinding))
+                    .AddSection("card_generator", section => section
+                        .WithTitle(ModSettingsText.Literal("Card Generator"))
+                        .AddToggle("upgrade_preview",
+                            ModSettingsText.Literal(
+                                "View Upgrades when choosing cards from Relics, Potions or Card effects"),
+                            CardGeneratorSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding));
             },
             "in_combat");
     }
@@ -66,7 +73,8 @@ public static class ModSettingsRegistry
                     .WithDescription(ModSettingsText.Literal("Settings for card rewards after combat."))
                     .WithVisibleOnHostSurfaces(ModSettingsHostSurface.All)
                     .AddSection("card_rewards", section => section.WithTitle(ModSettingsText.Literal("Card Rewards"))
-                            .AddToggle("upgrade_preview", ModSettingsText.Literal("View Upgrades in card rewards"), CardRewardSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding));
+                        .AddToggle("upgrade_preview", ModSettingsText.Literal("View Upgrades in card rewards"),
+                            CardRewardSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding));
             },
             "post_combat");
     }
@@ -82,12 +90,19 @@ public static class ModSettingsRegistry
                     .WithDescription(ModSettingsText.Literal("Settings for card selection screens."))
                     .WithVisibleOnHostSurfaces(ModSettingsHostSurface.All)
                     .AddSection("vanilla", section => section.WithTitle(ModSettingsText.Literal("Vanilla"))
-                            .AddToggle("card_upgrade", ModSettingsText.Literal("View Upgrades in Card Upgrade Screen"), CardUpgradeSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
-                            .AddToggle("card_transform", ModSettingsText.Literal("View Upgrades in Card Transform Screen"), CardTransformSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding))
+                        .AddToggle("card_upgrade", ModSettingsText.Literal("View Upgrades in Card Upgrade Screen"),
+                            CardUpgradeSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
+                        .AddToggle("card_transform", ModSettingsText.Literal("View Upgrades in Card Transform Screen"),
+                            CardTransformSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding))
                     .AddSection("added", section => section.WithTitle(ModSettingsText.Literal("Added"))
-                            .AddToggle("card_removal", ModSettingsText.Literal("View Upgrades in Card Removal Screen"), CardRemovalSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
-                            .AddToggle("card_duplicate", ModSettingsText.Literal("View Upgrades in Card Duplicate Screen"), CardDuplicateSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
-                            .AddToggle("card_enchant", ModSettingsText.Literal("View Upgrades in Card Enchant Screen"), CardEnchantSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding));
+                        .AddToggle("card_removal", ModSettingsText.Literal("View Upgrades in Card Removal Screen"),
+                            CardRemovalSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
+                        .AddToggle("card_duplicate", ModSettingsText.Literal("View Upgrades in Card Duplicate Screen"),
+                            CardDuplicateSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
+                        .AddToggle("card_enchant", ModSettingsText.Literal("View Upgrades in Card Enchant Screen"),
+                            CardEnchantSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding)
+                        .AddToggle("card_bundles", ModSettingsText.Literal("View Upgrades in Card Bundle Screen"),
+                            CardBundleSelectionScreenSettingsConfig.Instance.UpgradePreviewBinding));
             },
             "selection_screens");
     }
