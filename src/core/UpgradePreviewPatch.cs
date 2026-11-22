@@ -1,18 +1,14 @@
 ﻿using System;
-
 using Godot;
-
 using MegaCrit.Sts2.Core.Nodes.Combat;
-
 using MoreUpgradedCardPreviews.UI;
 
 namespace MoreUpgradedCardPreviews.Core;
 
 public abstract class UpgradePreviewPatch<TScreen>(TScreen screen) where TScreen : Control
 {
-    private UpgradePreviewToggle? _toggle;
-
     private Action<bool>? _settingChangedHandler;
+    private UpgradePreviewToggle? _toggle;
     private Action? _treeExitingHandler;
 
     protected TScreen Screen => screen;
@@ -25,15 +21,21 @@ public abstract class UpgradePreviewPatch<TScreen>(TScreen screen) where TScreen
 
     protected abstract void ApplyPreview(bool showingUpgrades);
 
-    protected virtual NPeekButton? GetPeekButton() { return null; }
+    protected virtual NPeekButton? GetPeekButton()
+    {
+        return null;
+    }
 
-    protected virtual bool CanAttach() { return true;}
-    
+    protected virtual bool CanAttach()
+    {
+        return true;
+    }
+
     public void Attach()
     {
         if (!GodotObject.IsInstanceValid(screen)) return;
         if (!CanAttach()) return;
-        
+
         _settingChangedHandler = OnSettingChanged;
         _treeExitingHandler = Cleanup;
 
@@ -65,7 +67,7 @@ public abstract class UpgradePreviewPatch<TScreen>(TScreen screen) where TScreen
     {
         if (_toggle != null) return;
         if (!GodotObject.IsInstanceValid(screen)) return;
-        
+
         var toggle = UpgradePreviewToggle.TryCreate(screen, ApplyPreview);
         if (toggle == null) return;
 
@@ -74,8 +76,10 @@ public abstract class UpgradePreviewPatch<TScreen>(TScreen screen) where TScreen
         _toggle = toggle;
         OnToggleCreated(toggle);
     }
-    
-    protected virtual void OnToggleCreated(UpgradePreviewToggle toggle) {}
+
+    protected virtual void OnToggleCreated(UpgradePreviewToggle toggle)
+    {
+    }
 
     private void RemoveToggle()
     {

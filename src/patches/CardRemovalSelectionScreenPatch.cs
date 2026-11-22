@@ -1,30 +1,29 @@
 ﻿using System;
-
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
-
-using STS2RitsuLib.Patching.Core;
-using STS2RitsuLib.Patching.Models;
-
 using MoreUpgradedCardPreviews.Core;
 using MoreUpgradedCardPreviews.Settings.Configs;
+using STS2RitsuLib.Patching.Core;
+using STS2RitsuLib.Patching.Models;
 
 namespace MoreUpgradedCardPreviews.Patches;
 
 public sealed class CardRemovalSelectionScreenPatch : DeckCardSelectUpgradePreviewPatch, IModPatches
 {
-    private CardRemovalSelectionScreenPatch(NDeckCardSelectScreen screen) : base(screen) {}
+    private CardRemovalSelectionScreenPatch(NDeckCardSelectScreen screen) : base(screen)
+    {
+    }
 
     public static void AddTo(ModPatcher patcher)
     {
         patcher.RegisterPatch(
             new ModPatchInfo(
-                id: $"{ModInfo.Id}.card_removal_selection_screen",
-                targetType: typeof(NDeckCardSelectScreen),
-                methodName: nameof(NDeckCardSelectScreen.Create),
-                patchType: typeof(CardRemovalSelectionScreenPatch),
-                isCritical: true,
-                description: "Adds the upgrade preview toggle to the deck card selection screen - removal."
+                $"{ModInfo.Id}.card_removal_selection_screen",
+                typeof(NDeckCardSelectScreen),
+                nameof(NDeckCardSelectScreen.Create),
+                typeof(CardRemovalSelectionScreenPatch),
+                true,
+                "Adds the upgrade preview toggle to the deck card selection screen - removal."
             )
         );
     }
@@ -32,7 +31,7 @@ public sealed class CardRemovalSelectionScreenPatch : DeckCardSelectUpgradePrevi
     public static void Postfix(NDeckCardSelectScreen __result, CardSelectorPrefs prefs)
     {
         if (prefs.Prompt.GetRawText() != CardSelectorPrefs.RemoveSelectionPrompt.GetRawText()) return;
-        
+
         var patch = new CardRemovalSelectionScreenPatch(__result);
         __result.Ready += patch.Attach;
     }

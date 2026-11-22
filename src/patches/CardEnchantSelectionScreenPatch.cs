@@ -1,34 +1,32 @@
 ﻿using System;
-
 using Godot;
-
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
-
-using STS2RitsuLib.Patching.Core;
-using STS2RitsuLib.Patching.Models;
-
 using MoreUpgradedCardPreviews.Core;
 using MoreUpgradedCardPreviews.Settings.Configs;
 using MoreUpgradedCardPreviews.UI;
+using STS2RitsuLib.Patching.Core;
+using STS2RitsuLib.Patching.Models;
 
 namespace MoreUpgradedCardPreviews.Patches;
 
 public sealed class CardEnchantSelectionScreenPatch : UpgradePreviewPatch<NDeckEnchantSelectScreen>, IModPatches
 {
-    private CardEnchantSelectionScreenPatch(NDeckEnchantSelectScreen screen) : base(screen) {}
+    private CardEnchantSelectionScreenPatch(NDeckEnchantSelectScreen screen) : base(screen)
+    {
+    }
 
     public static void AddTo(ModPatcher patcher)
     {
         patcher.RegisterPatch(
             new ModPatchInfo(
-                id: $"{ModInfo.Id}.card_enchant_selection_screen",
-                targetType: typeof(NDeckEnchantSelectScreen),
-                methodName: nameof(NDeckEnchantSelectScreen._Ready),
-                patchType: typeof(CardEnchantSelectionScreenPatch),
-                isCritical: true,
-                description: "Adds the upgrade preview toggle to the deck enchant selection screen."
+                $"{ModInfo.Id}.card_enchant_selection_screen",
+                typeof(NDeckEnchantSelectScreen),
+                nameof(NDeckEnchantSelectScreen._Ready),
+                typeof(CardEnchantSelectionScreenPatch),
+                true,
+                "Adds the upgrade preview toggle to the deck enchant selection screen."
             )
         );
     }

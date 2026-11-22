@@ -1,12 +1,9 @@
 using System;
-
 using Godot;
-
 using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
-
 using MoreUpgradedCardPreviews.Core;
 
 namespace MoreUpgradedCardPreviews.UI;
@@ -18,23 +15,22 @@ public sealed class UpgradePreviewToggle
     private const string GameTickboxScenePath = "res://scenes/ui/tickbox.tscn";
     private const string MegaLabelScriptPath = "res://addons/mega_text/MegaLabel.cs";
     private const string FontPath = "res://themes/kreon_bold_glyph_space_one.tres";
-    
-    private readonly Control _container;
-    private readonly UpgradePreviewTickbox _tickbox;
     private readonly Action<bool> _applyState;
-    
-    private bool _isSyncing;
+
     private bool _disposed;
+
+    private bool _isSyncing;
 
     private UpgradePreviewToggle(Control container, UpgradePreviewTickbox tickbox, Action<bool> applyState)
     {
-        _container = container;
-        _tickbox = tickbox;
+        Container = container;
+        Tickbox = tickbox;
         _applyState = applyState;
     }
-    
-    public Control Container => _container;
-    public UpgradePreviewTickbox Tickbox => _tickbox;
+
+    public Control Container { get; }
+
+    public UpgradePreviewTickbox Tickbox { get; }
 
     public static UpgradePreviewToggle? TryCreate(Node parent, Action<bool> applyState)
     {
@@ -112,7 +108,7 @@ public sealed class UpgradePreviewToggle
 
         var tickboxId = upgradesNode.GetInstanceId();
         upgradesNode.SetScript(tickboxScript);
-        
+
         var tickbox = GodotObject.InstanceFromId(tickboxId) as UpgradePreviewTickbox;
         if (tickbox == null)
         {
@@ -149,7 +145,7 @@ public sealed class UpgradePreviewToggle
         return true;
     }
 
-    private static bool SetupMegaLabel(Label labelNode) 
+    private static bool SetupMegaLabel(Label labelNode)
     {
         var megaLabelScript = GD.Load<CSharpScript>(MegaLabelScriptPath);
         if (megaLabelScript == null)
@@ -183,7 +179,7 @@ public sealed class UpgradePreviewToggle
         label.AutoSizeEnabled = false;
         label.MinFontSize = 28;
         label.MaxFontSize = 28;
-        
+
         label.SetTextAutoSize(
             new LocString(
                 "card_selection",
@@ -195,7 +191,7 @@ public sealed class UpgradePreviewToggle
 
     private void Initialize()
     {
-        _tickbox.Toggled += OnToggled;
+        Tickbox.Toggled += OnToggled;
 
         UpgradePreviewManager.Instance.OnToggleStateChanged += OnManagerStateChanged;
         UpgradePreviewManager.Instance.SetShowingUpgrades(false);
@@ -206,7 +202,7 @@ public sealed class UpgradePreviewToggle
     private void OnToggled(NTickbox tickbox)
     {
         if (_isSyncing || _disposed) return;
-        
+
         UpgradePreviewManager.Instance.SetShowingUpgrades(tickbox.IsTicked);
     }
 
@@ -232,7 +228,7 @@ public sealed class UpgradePreviewToggle
 
         try
         {
-            if (_tickbox.IsTicked != showingUpgrades) _tickbox.IsTicked = showingUpgrades;
+            if (Tickbox.IsTicked != showingUpgrades) Tickbox.IsTicked = showingUpgrades;
         }
         finally
         {
@@ -257,15 +253,15 @@ public sealed class UpgradePreviewToggle
         if (_disposed) return;
         _disposed = true;
 
-        _tickbox.Toggled -= OnToggled;
+        Tickbox.Toggled -= OnToggled;
         UpgradePreviewManager.Instance.OnToggleStateChanged -= OnManagerStateChanged;
-        
-        if (GodotObject.IsInstanceValid(_container))
-        {
-            var parent = _container.GetParent();
-            if (parent != null) parent.RemoveChild(_container);
 
-            _container.QueueFree();
+        if (GodotObject.IsInstanceValid(Container))
+        {
+            var parent = Container.GetParent();
+            if (parent != null) parent.RemoveChild(Container);
+
+            Container.QueueFree();
         }
     }
 }

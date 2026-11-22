@@ -1,5 +1,4 @@
 ﻿using System;
-
 using STS2RitsuLib;
 using STS2RitsuLib.Settings;
 using STS2RitsuLib.Utils.Persistence;
@@ -9,13 +8,11 @@ namespace MoreUpgradedCardPreviews.Core;
 public abstract class SingleUpgradePreviewSettingsConfig<TSettings> where TSettings : class, new()
 {
     private readonly string _dataKey;
+    private readonly Func<TSettings> _defaultFactory;
     private readonly string _fileName;
 
     private readonly Func<TSettings, bool> _getEnabled;
     private readonly Action<TSettings, bool> _setEnabled;
-    private readonly Func<TSettings> _defaultFactory;
-
-    private readonly ModSettingsValueBinding<TSettings, bool> _upgradePreviewBinding;
 
     protected SingleUpgradePreviewSettingsConfig(
         string dataKey,
@@ -31,22 +28,22 @@ public abstract class SingleUpgradePreviewSettingsConfig<TSettings> where TSetti
         _setEnabled = setEnabled;
         _defaultFactory = defaultFactory;
 
-        _upgradePreviewBinding = new(
+        UpgradePreviewBinding = new ModSettingsValueBinding<TSettings, bool>(
             ModInfo.Id,
             _dataKey,
             SaveScope.Global,
             _getEnabled,
             SetUpgradePreviewEnabled
-            );
+        );
     }
+
+    public ModSettingsValueBinding<TSettings, bool> UpgradePreviewBinding { get; }
 
     public event Action<bool>? UpgradePreviewEnabledChanged;
 
-    public ModSettingsValueBinding<TSettings, bool> UpgradePreviewBinding => _upgradePreviewBinding;
-
     public bool IsUpgradePreviewEnabled()
     {
-        return _upgradePreviewBinding.Read();
+        return UpgradePreviewBinding.Read();
     }
 
     public void SubscribeToUpgradePreviewChanges(Action<bool> handler)
@@ -71,11 +68,11 @@ public abstract class SingleUpgradePreviewSettingsConfig<TSettings> where TSetti
             var store = RitsuLibFramework.GetDataStore(ModInfo.Id);
 
             store.Register(
-                key: _dataKey,
-                fileName: _fileName,
-                scope: SaveScope.Global,
-                defaultFactory: _defaultFactory,
-                autoCreateIfMissing: true);
+                _dataKey,
+                _fileName,
+                SaveScope.Global,
+                _defaultFactory,
+                true);
         }
     }
 

@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Linq;
 using Godot;
-
 using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
-
-using STS2RitsuLib.Patching.Core;
-using STS2RitsuLib.Patching.Models;
-
 using MoreUpgradedCardPreviews.Core;
 using MoreUpgradedCardPreviews.Settings.Configs;
+using STS2RitsuLib.Patching.Core;
+using STS2RitsuLib.Patching.Models;
 
 namespace MoreUpgradedCardPreviews.Patches;
 
 public sealed class CardRewardSelectionScreenPatch : UpgradePreviewPatch<NCardRewardSelectionScreen>, IModPatches
 {
-    private CardRewardSelectionScreenPatch(NCardRewardSelectionScreen screen) : base(screen) {}
+    private CardRewardSelectionScreenPatch(NCardRewardSelectionScreen screen) : base(screen)
+    {
+    }
 
     public static void AddTo(ModPatcher patcher)
     {
         patcher.RegisterPatch(
             new ModPatchInfo(
-                id: $"{ModInfo.Id}.card_reward_selection_screen",
-                targetType: typeof(NCardRewardSelectionScreen),
-                methodName: "_Ready",
-                patchType: typeof(CardRewardSelectionScreenPatch),
-                isCritical: true,
-                description: "Adds upgrade preview toggle to card rewards."
+                $"{ModInfo.Id}.card_reward_selection_screen",
+                typeof(NCardRewardSelectionScreen),
+                "_Ready",
+                typeof(CardRewardSelectionScreenPatch),
+                true,
+                "Adds upgrade preview toggle to card rewards."
             )
         );
     }
