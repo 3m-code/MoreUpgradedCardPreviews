@@ -39,11 +39,12 @@ These screens already have an upgrade preview option in the base game:
 * Card Removal
 * Card Duplicate
 * Card Enchant
-* Card Bundle select
+* Card Bundle selection
+* Blitz starting card selection
 
 ## Requirements
 
-* Slay the Spire 2 minimum version 0.107.1
+* Slay the Spire 2 minimum version 0.111.1
 * STS2-RitsuLib 0.6.2
 
 ## Installation
